@@ -1,11 +1,17 @@
-
+import { Route, Routes } from 'react-router-dom'
+import React from 'react'
 import './App.css'
 import Layout from './Components/Layout'
+import SignUp from './Components/Auth/signUp'
 
 
-function App() {
+const App: React.FC= ()=> {
   return(
-  <Layout />
+    <Routes>
+      <Route path='/' element={<Layout/>} />
+      <Route path='/signup' element={<SignUp />} />
+    </Routes> 
+  
   )
     
 }

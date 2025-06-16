@@ -3,36 +3,60 @@ import logo from '../../assets/Zhentryx.png'
 import img from '../../assets/Pictures/auth-img.png'
 import { Link } from 'react-router-dom'
 
-const signUp:React.FC = () => {
+const SignUp:React.FC = () => {
   return (
-    <div className='signup'>
-       <img src={logo} alt="" className='page-logo' />
+    <div className='font-["Poppins"]'>
+       <img src={logo} alt="" className='w-[15%] ml-20' />
 
-       <div className="container">
-         <img src={img} alt="" />
-          <div className="form-text">
+       <div className="flex border border-gray-200">
+         <img src={img} alt="" className='w-[150%]' />
+          <div className="py-24 px-8">
             <div className="text">
-              <div className="header-text">
-                <div className="small-text">
+              <div className="font-bold text-2xl">
+                <div className="text-[#474747] text-left w-4/5">
                   <p>
                   Show case your Moments with Style Effortlessly upload, organize, and display your photos in stunning galleries - no design skills needed
                   </p>
                 </div>
-                <form action="#">
-                  <label htmlFor="userName">Username</label>
-                  <input type="text" name="userName" id="userName" placeholder='Enter your username' />
+                <form className="block text-left text-sm mt-8">
+                  <label htmlFor="userName" className="block">Username</label>
+                  <input 
+                    type="text" 
+                    name="userName" 
+                    id="userName" 
+                    placeholder='Enter your username'
+                    className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1" 
+                  />
 
-                  <label htmlFor="email">Email</label>
-                  <input type="email" name="email" id="email" placeholder='Enter your email' />
+                  <label htmlFor="email" className="block">Email</label>
+                  <input 
+                    type="email" 
+                    name="email" 
+                    id="email" 
+                    placeholder='Enter your email'
+                    className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1" 
+                  />
 
-                  <label htmlFor="password">Password</label>
-                  <input type="password" name="password" id="password" placeholder='Enter your password' />
+                  <label htmlFor="password" className="block">Password</label>
+                  <input 
+                    type="password" 
+                    name="password" 
+                    id="password" 
+                    placeholder='Enter your password'
+                    className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1" 
+                  />
 
-                  <label htmlFor="confirmPassword">Confirm Password</label>
-                  <input type="password" name="confirmPassword" id="confirmPassword" placeholder='Enter your password' />
-                    <button>Sign Up</button>
-                    <div className="signup-text">
-                      <p>Already a Memeber? <Link to="/login">Login</Link></p>
+                  <label htmlFor="confirmPassword" className="block">Confirm Password</label>
+                  <input 
+                    type="password" 
+                    name="confirmPassword" 
+                    id="confirmPassword" 
+                    placeholder='Enter your password'
+                    className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1" 
+                  />
+                    <button className='w-full bg-[#1B10A4] text-white border-none py-[18px] px-6 rounded-lg cursor-pointer text-sm'>Sign Up</button>
+                    <div className="mt-4">
+                      <p>Already a Member? <Link to="/login" className="text-[#1B10A4]">Login</Link></p>
                     </div>
                 </form>
               </div>
@@ -43,4 +67,4 @@ const signUp:React.FC = () => {
   )
 }
 
-export default signUp
+export default SignUp

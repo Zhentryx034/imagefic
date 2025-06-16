@@ -1,0 +1,47 @@
+.signup{
+    font-family: 'Poppins', sans-serif;
+    .page-logo{
+        width: 15%;
+        margin-left: 5rem;
+    }.container{
+        display: flex;
+        border: solid 1px rgba(128, 128, 128, 0.228);
+        img{
+            width: 150%;
+        }
+        .form-text{
+            padding: 6rem 2rem;
+            .header-text{
+                font-weight: 700;
+                font-size: 24px;
+            }.small-text{
+                color: #474747;
+                text-align: left;
+                width: 80%;
+            }
+        }
+        form{
+            display: block;
+            text-align: left;
+            font-size: 14px;
+            margin-top: 2rem;
+            input{
+                margin: 20px 0;
+                width: 100%;
+                border: solid 1px #D3D3D3;
+                padding: 18px 24px;
+                outline-color: #1B10A4;
+                outline-width: 1px;
+            }
+            .signup-btn, .login-btn{
+                background-color: #1B10A4;
+                color: #fff;
+                border: none;
+                padding: 18px 24px;
+                border-radius: 10px;
+                cursor: pointer;
+                font-size: 14px;
+                width: 100%;
+            }
+        }
+    }

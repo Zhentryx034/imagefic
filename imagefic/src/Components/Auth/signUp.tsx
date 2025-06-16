@@ -12,8 +12,9 @@ const SignUp:React.FC = () => {
          <img src={img} alt="" className='w-[150%]' />
           <div className="py-24 px-8">
             <div className="text">
-              <div className="font-bold text-2xl">
-                <div className="text-[#474747] text-left w-4/5">
+                 <h2 className='font-bold text-2xl mb-4 text-left'>Join ZHENTRYX Today</h2>
+              <div className=" text-1xl">
+                <div className="text-[#474747] text-left w-4/5 mb-4">
                   <p>
                   Show case your Moments with Style Effortlessly upload, organize, and display your photos in stunning galleries - no design skills needed
                   </p>
@@ -25,7 +26,7 @@ const SignUp:React.FC = () => {
                     name="userName" 
                     id="userName" 
                     placeholder='Enter your username'
-                    className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1" 
+                    className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1 rounded-[10px]" 
                   />
 
                   <label htmlFor="email" className="block">Email</label>
@@ -34,7 +35,7 @@ const SignUp:React.FC = () => {
                     name="email" 
                     id="email" 
                     placeholder='Enter your email'
-                    className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1" 
+                    className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1 rounded-[10px]" 
                   />
 
                   <label htmlFor="password" className="block">Password</label>
@@ -43,7 +44,7 @@ const SignUp:React.FC = () => {
                     name="password" 
                     id="password" 
                     placeholder='Enter your password'
-                    className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1" 
+                    className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1 rounded-[10px]" 
                   />
 
                   <label htmlFor="confirmPassword" className="block">Confirm Password</label>
@@ -52,9 +53,9 @@ const SignUp:React.FC = () => {
                     name="confirmPassword" 
                     id="confirmPassword" 
                     placeholder='Enter your password'
-                    className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1" 
+                    className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1 rounded-[10px]" 
                   />
-                    <button className='w-full bg-[#1B10A4] text-white border-none py-[18px] px-6 rounded-lg cursor-pointer text-sm'>Sign Up</button>
+                    <button className='w-full bg-[#1B10A4] text-white border-none py-[18px] px-6 rounded-[10px] cursor-pointer text-sm'>Sign Up</button>
                     <div className="mt-4">
                       <p>Already a Member? <Link to="/login" className="text-[#1B10A4]">Login</Link></p>
                     </div>

@@ -8,13 +8,13 @@ const SignUp:React.FC = () => {
     <div className='font-["Poppins"]'>
        <img src={logo} alt="" className='w-[15%] ml-20' />
 
-       <div className="flex border border-gray-200">
-         <img src={img} alt="" className='w-[150%]' />
-          <div className="py-24 px-8">
+       <div className="flex flex-col md:flex-row border border-gray-200">
+         <img src={img} alt="" className='hidden md:block w-[70%]' />
+          <div className="py-12 md:py-24 px-4 md:px-8">
             <div className="text">
-                 <h2 className='font-bold text-2xl mb-4 text-left'>Join ZHENTRYX Today</h2>
-              <div className=" text-1xl">
-                <div className="text-[#474747] text-left w-4/5 mb-4">
+              <h2 className='font-bold text-xl md:text-2xl mb-4 text-left'>Join ZHENTRYX Today</h2>
+               <div className="text-base md:text-1xl">
+                 <div className="text-[#474747] text-left w-full md:w-4/5 mb-4">
                   <p>
                   Show case your Moments with Style Effortlessly upload, organize, and display your photos in stunning galleries - no design skills needed
                   </p>

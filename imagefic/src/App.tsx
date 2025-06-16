@@ -1,11 +1,15 @@
-
+import { Route, Routes } from 'react-router-dom'
+import React from 'react'
 import './App.css'
 import Layout from './Components/Layout'
 
 
-function App() {
+const App: React.FC= ()=> {
   return(
-  <Layout />
+    <Routes>
+      <Route path='/' element={<Layout/>} />
+    </Routes>
+  
   )
     
 }

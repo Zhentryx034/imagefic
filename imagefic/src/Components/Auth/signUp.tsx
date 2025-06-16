@@ -10,7 +10,7 @@ const SignUp:React.FC = () => {
 
        <div className="flex flex-col md:flex-row border border-gray-200">
          <img src={img} alt="" className='hidden md:block w-[70%]' />
-          <div className="py-12 md:py-24 px-4 md:px-8">
+          <div className="py-12 md:py-32 px-4 md:px-8">
             <div className="text">
               <h2 className='font-bold text-xl md:text-2xl mb-4 text-left'>Join ZHENTRYX Today</h2>
                <div className="text-base md:text-1xl">

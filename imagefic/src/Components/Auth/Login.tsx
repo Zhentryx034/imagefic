@@ -38,7 +38,9 @@ const Login:React.FC = () => {
                     placeholder='Enter your password'
                     className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1 rounded-[10px]" 
                   />
-                  
+                   <input type="checkbox" name="remember" id="remember" className='w-4 h-4'/>
+                   <label htmlFor="remember" className='text-sm text-[#474747] ml-2 '>Remember me</label>
+                   <Link to="/forgot-password" className="text-[#1B10A4] text-sm ml-20 ">Forgot Password?</Link>
 
                     <button className='w-full bg-[#1B10A4] text-white border-none py-[18px] px-6 rounded-[10px] cursor-pointer text-sm'>Sign In</button>
                     <div className="mt-4">

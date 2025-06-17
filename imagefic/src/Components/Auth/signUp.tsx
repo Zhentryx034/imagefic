@@ -1,9 +1,53 @@
-import React from 'react'
+import React, {use, useState} from 'react'
 import logo from '../../assets/Zhentryx.png'
 import img from '../../assets/Pictures/auth-img.png'
 import { Link } from 'react-router-dom'
+import { createUser } from './authConfig'
 
 const SignUp:React.FC = () => {
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    phone_number: '',
+    password: '',
+    confirm_password: ''
+  })
+
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
+        setFormData({
+          ...formData,
+          [e.target.name]: e.target.value,
+        })
+  }
+
+  const handleSubmit = async (e:React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setError(null)
+
+    try{
+      await createUser(
+        formData.username,
+        formData.email,
+        Number(formData.phone_number),
+        formData.password,
+        formData.confirm_password
+      )
+      alert('Registration Successful')
+    } catch (err: unknown){
+      if (err instanceof Error) {
+        setError(err.message || "Something went Wrong")
+      } else {
+        setError("Something went Wrong")
+      }
+    }finally{
+      setLoading(false)
+    }
+  }
+
   return (
     <div className='font-["Poppins"]'>
        <img src={logo} alt="" className='w-[15%] ml-20' />

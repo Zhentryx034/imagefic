@@ -11,7 +11,7 @@ import image6 from '../assets/Pictures/image6.png'
 import image8 from '../assets/Pictures/image8.png'
 import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar:React.FC = () => {
   return (
         <section className=' relative w-full h-screen bg-cover bg-center bg-no-repeat flex flex-col '
         style={{backgroundImage: `url(${bgimage})`}} >

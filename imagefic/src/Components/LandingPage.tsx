@@ -9,6 +9,7 @@ import image4 from '../assets/Pictures/image4.png'
 import image5 from '../assets/Pictures/image5.png'
 import image6 from '../assets/Pictures/image6.png'
 import image8 from '../assets/Pictures/image8.png'
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
@@ -34,10 +35,10 @@ const Navbar = () => {
 
                 <div className='flex gap-4'>
                 <button className='text-white border-2 rounded w-40 h-12'>
-                    LOG IN
+                   <Link to='/login'>LOG IN</Link> 
                 </button>
                 <button className='text-white border-0 rounded w-40 h-12 bg-[#1B10A4] ' >
-                    SIGN UP
+                 <Link to='/signup'>SIGN UP </Link>
                 </button>
                 </div>
                 <div>

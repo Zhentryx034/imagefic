@@ -21,8 +21,28 @@ export async function  createUser (username:string, email:string,phone_number:nu
     }
 }
 
-export default function loginUser () {
+export async function loginUser (email:string, password:string) {
+    try{
+        const res = await fetch(`${API_BASE_URL}/login`, {
+            method: "POST", 
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({email, password})
+        })
 
+        const data = await res.json()
+        if(!res.ok) throw new Error(data.message || "Login Failed")
+
+            //this logic save the user login token in local storage
+        localStorage.setItem('authToken', data.token)
+        return data
+
+    }catch(err:unknown){
+        console.log("Login Error", err)
+        throw err
+    }
+ 
 }
 
 export default function logOutUser(){

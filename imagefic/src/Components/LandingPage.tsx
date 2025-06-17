@@ -40,9 +40,7 @@ const Navbar:React.FC = () => {
                 </button>
                 <button className='text-white border-0 rounded w-40 h-12 bg-[#1B10A4] ' >
                  <Link to='/signup'>SIGN UP </Link>
-
                 </button>
-                </Link>
                 </div>
                 <div className='mt-10'>
                     <img src={Frame7} alt="" className='relative mx-auto w-48 md:w-64 lg:w-80 xl:w-[400px] -top-40 md:-top-72' style={{
@@ -93,7 +91,8 @@ const Navbar:React.FC = () => {
         </div>
 
       </section>
-        </section>
+    </section>
+        
 
   )
 }

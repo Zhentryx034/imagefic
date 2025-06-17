@@ -23,32 +23,32 @@ const Navbar = () => {
 <div className='z-20 flex justify-center pt-8'>
     <img src={Zhentryx} alt="" className='w-40 md:w-60 lg:w-72 xl:w-80 h-auto' />
 </div>
-            <div className=' text-white z-20 flex flex-col items-start max-w-[90%] sm:max-w-[600px] md:max-w-[700px] px-4 sm:px-6 md:px-10 mt-64 md:mt-96 lg:mt-[700px]'
-            style={{marginTop:'700px',marginLeft:'10px'}} >
+            <div className=' text-white z-20 flex flex-col items-start max-w-[90%] sm:max-w-[600px] md:max-w-[700px] px-4 sm:px-6 md:px-10 mt-20 md:mt-32 lg:mt-40'
+            style={{marginTop:'600px',marginLeft:'9px'}} >
                 <h2 className='text-4xl sm:text-5xl md:text-6xl font-castoro mb-4'>
                     GALLERY OF 
                 </h2>
                 <h2 className='text-4xl sm:text-5xl md:text-6xl font-castoro mb-4'>
                 LIFE AND DEATH
                 </h2>
-                <p className='font-roboto leading-relaxed mb-4 max-w-[800px] text-sm sm:text-base '>
+                <p className='font-roboto leading-relaxed mb-4 max-w-[800px] text-sm sm:text-base mr-16'>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam quae iure accusantium quasi laudantium voluptate repellendus nulla?
                 </p>
 
                 <div className='flex gap-4 flex-wrap'>
-                <button className='ttext-white border-2 rounded w-32 sm:w-40 h-10 sm:h-12 text-sm'>
+                <button className='text-white border-2 rounded w-32 sm:w-40 h-10 sm:h-12 text-sm'>
                     LOG IN
                 </button>
                
                 <Link to ='/signUp'>
-                <button className='ttext-white border-0 rounded w-32 sm:w-40 h-10 sm:h-12 text-sm bg-[#1B10A4] ' >
+                <button className='text-white border-0 rounded w-32 sm:w-40 h-10 sm:h-12 text-sm bg-[#1B10A4] ' >
                     SIGN UP
                 </button>
                 </Link>
                 </div>
                 <div className='mt-10'>
                     <img src={Frame7} alt="" className='relative mx-auto w-48 md:w-64 lg:w-80 xl:w-[400px] -top-40 md:-top-72' style={{
-                        marginLeft:'500px', top:'-400px', position:'relative'
+                        marginLeft:'550px', top:'-400px', position:'relative'
                     }} />
                 </div>
             </div>

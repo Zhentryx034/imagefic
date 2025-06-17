@@ -1,4 +1,5 @@
 import React from 'react'
+import{Link} from 'react-router-dom'
 import bgimage from "../assets/bgimage.png"
 import Zhentryx from "../assets/Zhentryx.png"
 import image1 from "../assets/Pictures/image1.png"
@@ -38,9 +39,12 @@ const Navbar = () => {
                 <button className='text-white border-2 rounded w-40 h-12'>
                     LOG IN
                 </button>
+               
+                <Link to ='/signUp'>
                 <button className='text-white border-0 rounded w-40 h-12 bg-[#1B10A4] ' >
                     SIGN UP
                 </button>
+                </Link>
                 </div>
                 <div>
                     <img src={Frame7} alt="" style={{

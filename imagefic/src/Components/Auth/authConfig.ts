@@ -45,6 +45,24 @@ export async function loginUser (email:string, password:string) {
  
 }
 
-export default function logOutUser(){
+export async function logOutUser(){
+ try{
+    const token = localStorage.getItem('authToken')
+    if(!token) throw new Error("No token found")
 
+    const res = await fetch(`${API_BASE_URL}/login`, {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+    })
+
+    if(!res.ok) throw new Error ('Logout Failed')
+        localStorage.removeItem("authToken")
+    return true
+ }
+ catch (err:unknown){
+     console.error("Logout error", err)
+     throw err
+ }
 }

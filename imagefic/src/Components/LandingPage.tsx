@@ -1,19 +1,18 @@
 import React from 'react'
-import{Link} from 'react-router-dom'
-import bgimage from "../assets/bgimage.png"
-import Zhentryx from "../assets/Zhentryx.png"
-import image1 from "../assets/Pictures/image1.png"
-import image2 from "../assets/Pictures/image2.png"
-import image3 from "../assets/Pictures/image3.png"
-import image4 from "../assets/Pictures/image4.png"
-import image5 from "../assets/Pictures/image5.png"
-import image6 from "../assets/Pictures/image6.png"
-import image8 from "../assets/Pictures/image8.png"
-import Frame7 from "../assets/Frame 761.png"
+import Zhentryx from '../assets/Zhentryx.png'
+import bgimage from '../assets/bgimage.png'
+import Frame7 from '../assets/Frame 761.png'
+import image1 from '../assets/Pictures/image1.png'
+import image2 from '../assets/Pictures/image2.png'
+import image3 from '../assets/Pictures/image3.png'
+import image4 from '../assets/Pictures/image4.png'
+import image5 from '../assets/Pictures/image5.png'
+import image6 from '../assets/Pictures/image6.png'
+import image8 from '../assets/Pictures/image8.png'
+import { Link } from 'react-router-dom';
 
 
-
-const Navbar = () => {
+const Navbar:React.FC = () => {
   return (
         <section className=' relative w-full h-screen bg-cover bg-center bg-no-repeat flex flex-col '
         style={{backgroundImage: `url(${bgimage})`, backgroundPosition:'center'}} >
@@ -35,16 +34,13 @@ const Navbar = () => {
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam quae iure accusantium quasi laudantium voluptate repellendus nulla?
                 </p>
 
-                <div className='flex gap-4 flex-wrap'>
-                <button className='text-white border-2 rounded w-32 sm:w-40 h-10 sm:h-12 text-sm'>
-                    LOG IN
+                <div className='flex gap-4'>
+                <button className='text-white border-2 rounded w-40 h-12'>
+                   <Link to='/login'>LOG IN</Link> 
                 </button>
-               
-                <Link to ='/signUp'>
-                <button className='text-white border-0 rounded w-32 sm:w-40 h-10 sm:h-12 text-sm bg-[#1B10A4] ' >
-                    SIGN UP
+                <button className='text-white border-0 rounded w-40 h-12 bg-[#1B10A4] ' >
+                 <Link to='/signup'>SIGN UP </Link>
                 </button>
-                </Link>
                 </div>
                 <div className='mt-10'>
                     <img src={Frame7} alt="" className='relative mx-auto w-48 md:w-64 lg:w-80 xl:w-[400px] -top-40 md:-top-72' style={{
@@ -95,7 +91,8 @@ const Navbar = () => {
         </div>
 
       </section>
-        </section>
+    </section>
+        
 
   )
 }

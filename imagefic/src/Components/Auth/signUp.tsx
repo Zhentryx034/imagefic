@@ -1,9 +1,53 @@
-import React from 'react'
+import React, { useState} from 'react'
 import logo from '../../assets/Zhentryx.png'
 import img from '../../assets/Pictures/auth-img.png'
 import { Link } from 'react-router-dom'
+import { createUser } from './authConfig'
 
 const SignUp:React.FC = () => {
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    phone_number: '',
+    password: '',
+    confirm_password: ''
+  })
+
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
+        setFormData({
+          ...formData,
+          [e.target.name]: e.target.value,
+        })
+  }
+
+  const handleSubmit = async (e:React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setError(null)
+
+    try{
+      await createUser(
+        formData.username,
+        formData.email,
+        Number(formData.phone_number),
+        formData.password,
+        formData.confirm_password
+      )
+      alert('Registration Successful')
+    } catch (err: unknown){
+      if (err instanceof Error) {
+        setError(err.message || "Something went Wrong")
+      } else {
+        setError("Something went Wrong")
+      }
+    }finally{
+      setLoading(false)
+    }
+  }
+
   return (
     <div className='font-["Poppins"]'>
        <img src={logo} alt="" className='w-[15%] ml-20' />
@@ -23,8 +67,11 @@ const SignUp:React.FC = () => {
                   <label htmlFor="userName" className="block">Username</label>
                   <input 
                     type="text" 
-                    name="userName" 
+                    name="username" 
                     id="userName" 
+                    required
+                    value={formData.username}
+                    onChange={handleChange}
                     placeholder='Enter your username'
                     className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1 rounded-[10px]" 
                   />
@@ -34,6 +81,9 @@ const SignUp:React.FC = () => {
                     type="email" 
                     name="email" 
                     id="email" 
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
                     placeholder='Enter your email'
                     className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1 rounded-[10px]" 
                   />
@@ -43,6 +93,9 @@ const SignUp:React.FC = () => {
                     type="password" 
                     name="password" 
                     id="password" 
+                    required
+                    value={formData.password}
+                    onChange={handleChange}
                     placeholder='Enter your password'
                     className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1 rounded-[10px]" 
                   />
@@ -52,10 +105,13 @@ const SignUp:React.FC = () => {
                     type="password" 
                     name="confirmPassword" 
                     id="confirmPassword" 
+                    value={formData.confirm_password}
+                    onChange={handleChange}
                     placeholder='Enter your password'
                     className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1 rounded-[10px]" 
                   />
-                    <button className='w-full bg-[#1B10A4] text-white border-none py-[18px] px-6 rounded-[10px] cursor-pointer text-sm'>Sign Up</button>
+                  { error && <p className='text-red-500 mb-4'> {error}</p>}
+                    <button className='w-full bg-[#1B10A4] text-white border-none py-[18px] px-6 rounded-[10px] cursor-pointer text-sm' disabled={loading} onClick={handleSubmit}>{loading ? "Signing up.....": "Sign Up"}</button>
                     <div className="mt-4">
                       <p>Already a Member? <Link to="/login" className="text-[#1B10A4]">Login</Link></p>
                     </div>

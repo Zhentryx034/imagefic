@@ -111,7 +111,7 @@ const SignUp:React.FC = () => {
                     className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1 rounded-[10px]" 
                   />
                   { error && <p className='text-red-500 mb-4'> {error}</p>}
-                    <button className='w-full bg-[#1B10A4] text-white border-none py-[18px] px-6 rounded-[10px] cursor-pointer text-sm' disabled={loading}>{loading ? "Signing up.....": "Sign Up"}</button>
+                    <button className='w-full bg-[#1B10A4] text-white border-none py-[18px] px-6 rounded-[10px] cursor-pointer text-sm' disabled={loading} onClick={handleSubmit}>{loading ? "Signing up.....": "Sign Up"}</button>
                     <div className="mt-4">
                       <p>Already a Member? <Link to="/login" className="text-[#1B10A4]">Login</Link></p>
                     </div>

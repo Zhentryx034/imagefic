@@ -35,7 +35,7 @@ const Navbar:React.FC = () => {
                 </p>
 
                 <div className='flex gap-4'>
-                <button className='text-white border-2 rounded w-40 h-12'>
+                <button className='text-white border-2 rounded w-40 h-12 bg-black '>
                    <Link to='/login'>LOG IN</Link> 
                 </button>
                 <button className='text-white border-0 rounded w-40 h-12 bg-[#1B10A4] ' >

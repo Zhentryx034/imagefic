@@ -8,15 +8,8 @@ import img3 from '../../assets/Pictures/dashboard images/dashboard-img (5).png'
 import img4 from '../../assets/Pictures/dashboard images/dashboard-img (4).png'
 import img5 from '../../assets/Pictures/dashboard images/dashboard-img (3).png'
 import img6 from '../../assets/Pictures/dashboard images/dashboard-img (2).png'
+import Card from './Card';
 
-const Card: React.FC<{ img: string; title: string }> = ({ img, title }) => (
-    <div className='overflow-hidden'>
-        <img src={img} alt={title} className='w-[100%] h-68 object-cover rounded-lg shadow-md hover:scale-105' />
-        <div className='p-4'>
-            <h2 className='text-[26px] font-semibold text-gray-800'>{title}</h2>
-        </div>
-    </div>
-);
 
 const Dashboard: React.FC = () => {
     const items = [
@@ -44,8 +37,8 @@ const Dashboard: React.FC = () => {
         <div className='mt-36 pl-6 pr-6 '>
             <h1 className='text-[36px] font-bold mt-8 mb-6 text-left pl-8 '>Dashboard</h1>
             <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-16 p-6 bg-white'>
-                {items.map((item, index) => (
-                    <Card key={index} img={item.img} title={item.title} />
+                {items.map((item) => (
+                    <Card key={item.title} img={item.img} title={item.title} />
                 ))}
             </div>
         </div>

@@ -34,12 +34,12 @@ const Dashboard: React.FC = () => {
         </nav>
         <div className='mt-36 pl-6 pr-6 '>
             <h1 className='text-[36px] font-bold mt-8 mb-6 text-left pl-8 '>Dashboard</h1>
-            <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 p-6 bg-white'>
+            <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-16 p-6 bg-white'>
                 {items.map((item, index) => (
                     <div key={index} className=' overflow-hidden'>
                         <img src={item.img} alt={item.title} className='w-[100%] h-68 object-cover rounded-lg shadow-md hover:scale-105' />
                         <div className='p-4'>
-                            <h2 className='text-[26px] font-semibold text-[#333]'>{item.title}</h2>
+                            <h2 className='text-[26px] font-semibold text-[#3339]'>{item.title}</h2>
                         </div>
                     </div>
                 ))}

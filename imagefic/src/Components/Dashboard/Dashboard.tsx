@@ -35,8 +35,8 @@ const Dashboard: React.FC = () => {
             <h1 className='text-[36px] font-bold mt-8 text-left pl-8 '>Dashboard</h1>
             <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 bg-white'>
                 {items.map((item, index) => (
-                    <div key={index} className='bg-white rounded-lg shadow-md overflow-hidden'>
-                        <img src={item.img} alt={item.title} className='w-full h-48 object-cover' />
+                    <div key={index} className=' overflow-hidden'>
+                        <img src={item.img} alt={item.title} className='w-[150%] h-68 object-cover rounded-lg shadow-md ' />
                         <div className='p-4'>
                             <h2 className='text-lg font-semibold'>{item.title}</h2>
                         </div>

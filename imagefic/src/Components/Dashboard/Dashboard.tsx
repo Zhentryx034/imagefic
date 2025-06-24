@@ -4,11 +4,20 @@ import userImg from '../../assets/Pictures/dashboard images/user.png'
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
-      <p className="text-lg">Welcome to your dashboard!</p>
-      {/* Add more dashboard content here */}
-    </div>
+     <div className='font-["Poppins"] bg-[#F5F5F5] h-screen'>
+        <nav>
+            <div className='flex justify-between items-center bg-white p-4 shadow-md fixed top-0 left-0 right-0 z-50'>
+                <img src={logo} alt="Logo" className='w-[15%] ml-20' />
+                <div className='flex items-center space-x-4 font-semibold cursor-pointer text-[#333] mr-4'>
+                    <p>Home</p>
+                    <p>Explore</p>
+                    <p>Create</p>
+                <img src={userImg} alt="User" className='w-10 h-10 rounded-full' />
+               
+                </div>
+            </div>
+        </nav>
+     </div>
   );
 }
 

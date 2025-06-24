@@ -13,12 +13,12 @@ import Card from './Card';
 
 const Dashboard: React.FC = () => {
     const items = [
-        {img: img1, title: "Presentation" },
-        {img: img2, title: "Cars" },
-        {img: img3, title: "Illustration" },
-        {img: img4, title: "Art" },
-        {img: img5, title: "Sport" },
-        {img: img6, title: "Nature" }
+        { id: 1, img: img1, title: "Presentation" },
+        { id: 2, img: img2, title: "Cars" },
+        { id: 3, img: img3, title: "Illustration" },
+        { id: 4, img: img4, title: "Art" },
+        { id: 5, img: img5, title: "Sport" },
+        { id: 6, img: img6, title: "Nature" }
     ]
   return (
      <div className='font-["Poppins"] bg-white h-screen'>
@@ -38,7 +38,7 @@ const Dashboard: React.FC = () => {
             <h1 className='text-[36px] font-bold mt-8 mb-6 text-left pl-8 '>Dashboard</h1>
             <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-16 p-6 bg-white'>
                 {items.map((item) => (
-                    <Card key={item.title} img={item.img} title={item.title} />
+                    <Card key={item.id} img={item.img} title={item.title} />
                 ))}
             </div>
         </div>

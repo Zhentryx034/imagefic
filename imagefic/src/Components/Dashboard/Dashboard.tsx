@@ -2,11 +2,11 @@ import React from 'react';
 import logo from '../../assets/Zhentryx.png';
 import userImg from '../../assets/Pictures/dashboard images/user.png'
 import img1 from '../../assets/Pictures/dashboard images/dashboard-img (1).png'
-import img2 from '../../assets/Pictures/dashboard images/dashboard-img (2).png'
-import img3 from '../../assets/Pictures/dashboard images/dashboard-img (3).png' 
+import img2 from '../../assets/Pictures/dashboard images/dashboard-img (6).png'
+import img3 from '../../assets/Pictures/dashboard images/dashboard-img (5).png' 
 import img4 from '../../assets/Pictures/dashboard images/dashboard-img (4).png'
-import img5 from '../../assets/Pictures/dashboard images/dashboard-img (5).png'
-import img6 from '../../assets/Pictures/dashboard images/dashboard-img (6).png'
+import img5 from '../../assets/Pictures/dashboard images/dashboard-img (3).png'
+import img6 from '../../assets/Pictures/dashboard images/dashboard-img (2).png'
 
 const Dashboard: React.FC = () => {
     const items = [
@@ -32,13 +32,13 @@ const Dashboard: React.FC = () => {
             </div>
         </nav>
         <div className='mt-36 pl-6 pr-6 '>
-            <h1 className='text-[36px] font-bold mt-8 text-left pl-8 '>Dashboard</h1>
-            <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 bg-white'>
+            <h1 className='text-[36px] font-bold mt-8 mb-6 text-left pl-8 '>Dashboard</h1>
+            <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 p-6 bg-white'>
                 {items.map((item, index) => (
                     <div key={index} className=' overflow-hidden'>
-                        <img src={item.img} alt={item.title} className='w-[150%] h-68 object-cover rounded-lg shadow-md ' />
+                        <img src={item.img} alt={item.title} className='w-[100%] h-68 object-cover rounded-lg shadow-md ' />
                         <div className='p-4'>
-                            <h2 className='text-lg font-semibold'>{item.title}</h2>
+                            <h2 className='text-[26px] font-semibold text-[#333]'>{item.title}</h2>
                         </div>
                     </div>
                 ))}

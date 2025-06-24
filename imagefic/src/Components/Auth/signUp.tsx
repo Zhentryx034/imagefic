@@ -27,6 +27,11 @@ const SignUp:React.FC = () => {
     e.preventDefault()
     setLoading(true)
     setError(null)
+    if(formData.password !== formData.confirm_password) {
+        setError("Passwords do not match");
+        throw new Error("Passwords do not match");
+        return; 
+      }
 
     try{
       await createUser(
@@ -36,7 +41,8 @@ const SignUp:React.FC = () => {
         formData.password,
         formData.confirm_password
       )
-      alert('Registration Successful')
+      alert('Registration Successful') 
+      
     } catch (err: unknown){
       if (err instanceof Error) {
         setError(err.message || "Something went Wrong")
@@ -47,6 +53,7 @@ const SignUp:React.FC = () => {
       setLoading(false)
     }
   }
+
 
   return (
     <div className='font-["Poppins"]'>
@@ -103,7 +110,7 @@ const SignUp:React.FC = () => {
                   <label htmlFor="confirmPassword" className="block">Confirm Password</label>
                   <input 
                     type="password" 
-                    name="confirmPassword" 
+                    name="confirm_password" 
                     id="confirmPassword" 
                     value={formData.confirm_password}
                     onChange={handleChange}

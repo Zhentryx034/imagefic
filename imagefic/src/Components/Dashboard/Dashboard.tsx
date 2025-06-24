@@ -1,4 +1,6 @@
 import React from 'react';
+import logo from '../../assets/Zhentryx.png';
+import userImg from '../../assets/Pictures/dashboard images/user.png'
 
 const Dashboard: React.FC = () => {
   return (

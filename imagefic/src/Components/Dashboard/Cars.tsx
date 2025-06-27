@@ -17,7 +17,7 @@ import img13 from "../../assets/Pictures/cars/Untitled/car (13).png";
 import img14 from "../../assets/Pictures/cars/Untitled/car (14).png";
 import img15 from "../../assets/Pictures/cars/Untitled/car (15).png";
 
-const CARS_PER_PAGE = 15; // 5 columns x 3 rows
+const CARS_PER_PAGE = 3; // 5 columns x 3 rows
 
 // Example car images array (replace with your actual image URLs)
 const carImages: string[] = [
@@ -42,6 +42,12 @@ const Cars:React.FC = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
   const totalPages = Math.ceil(carImages.length / CARS_PER_PAGE);
   const [selectedIndex, setSelectedIndex] = useState(0);
+
+  useEffect(() => {
+    if (emblaApi) {
+      console.log("emblaApi is ready");
+    }
+  }, [emblaApi]);
 
   // Group images into pages
   const pages = Array.from({ length: totalPages }, (_, i) =>
@@ -71,10 +77,10 @@ const Cars:React.FC = () => {
       <DashboardNav />
       <div className="overflow-hidden mt-36 pl-6 pr-6 " ref={emblaRef}>
          <h1 className='text-[36px] font-bold mt-8 mb-6 text-left pl-8 '>Cars</h1>
-        <div className="flex">
+        <div className="embla__container flex flex-nowrap">
           {pages.map((page, pageIndex) => (
-            <div className="flex-shrink-0 w-full p-4" key={pageIndex}>
-              <div className="grid grid-cols-5 grid-rows-3 gap-4">
+            <div className="embla__slide" key={pageIndex}>
+              <div className="grid grid-cols-3 grid-rows-1 gap-4 p-4">
                 {page.map((img, i) => (
                   <img
                     key={i}
@@ -97,7 +103,10 @@ const Cars:React.FC = () => {
                 ? "bg-blue-600 text-white border-blue-600"
                 : "bg-white text-gray-700 hover:bg-blue-100"
             }`}
-            onClick={() => scrollTo(i)}
+            onClick={() => {
+              console.log(i, "has been clicked");
+              scrollTo(i);
+            }}
           >
             {i + 1}
           </button>

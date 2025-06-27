@@ -79,14 +79,14 @@ const Cars:React.FC = () => {
          <h1 className='text-[36px] font-bold mt-8 mb-6 text-left pl-8 '>Cars</h1>
         <div className="embla__container flex flex-nowrap">
           {pages.map((page, pageIndex) => (
-            <div className="embla__slide" key={pageIndex}>
-              <div className="grid grid-cols-3 grid-rows-1 gap-4 p-4">
+            <div className="embla__slide flex-shrink-0 basis-full p-4" key={pageIndex}>
+              <div className="grid grid-cols-3 grid-rows-1 gap-4">
                 {page.map((img, i) => (
                   <img
                     key={i}
                     src={img}
                     alt={`Car ${pageIndex * CARS_PER_PAGE + i + 1}`}
-                    className="w-full h-28 object-cover rounded-lg shadow hover:scale-105 transition-all duration-300"
+                    className="w-full h-80 object-cover rounded-lg shadow hover:scale-105 transition-all duration-300"
                   />
                 ))}
               </div>

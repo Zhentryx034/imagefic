@@ -25,13 +25,13 @@ const Navbar:React.FC = () => {
 
             <div className=' sm:text-white sm:h-[10vh]  z-20 flex flex-col items-start max-w-[100%] sm:max-w-[600px] md:max-w-[700px] px-4 sm:px-6 md:px-10 mt-20 md:mt-32 lg:mt-40'style={{marginTop:'600px',marginLeft:'9px'}} >
                 <div className='mt-[-25rem] sm:mt-[-13rem]'>
-                        <h2 className='text-5xl text-left sm:text-5xl md:text-6xl font-castoro mb-4  sm:mb-0'>
+                        <h2 className='text-5xl text-left sm:text-5xl md:text-6xl font-castoro mb-4  sm:mb-0 text-white'>
                             GALLERY OF 
                         </h2>
-                        <h2 className='text-5xl text-left sm:text-5xl md:text-6xl font-castoro mb-4'>
+                        <h2 className='text-5xl text-left sm:text-5xl md:text-6xl font-castoro mb-4 text-white'>
                         LIFE AND DEATH
                         </h2>
-                        <p className='text-left font-roboto leading-relaxed mb-4 max-w-[800px] text-sm sm:text-base mr-16'>
+                        <p className='text-left text-white font-roboto leading-relaxed mb-4 max-w-[800px] text-sm sm:text-base mr-16'>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam quae iure accusantium quasi laudantium voluptate repellendus nulla?
                         </p>
 
@@ -55,7 +55,7 @@ const Navbar:React.FC = () => {
         <div className='text-center mx-auto max-w-7xl border-blue-800' style={{
             width:'100%'
         }}>
-            <h2 className='text-xl sm:text-2xl md:text-3xl font-roboto mb-4 font-medium '>
+            <h2 className='text-xl sm:text-2xl md:text-3xl font-roboto mb-4 mt-8 font-medium '>
                 Create Your Best Work, with High Quality Images
             </h2>
             <p className='font-roboto text-sm sm:text-base mb-12'>

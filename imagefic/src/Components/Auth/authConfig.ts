@@ -36,6 +36,7 @@ export async function loginUser (email:string, password:string) {
 
             //this logic save the user login token in local storage
         localStorage.setItem('authToken', data.token)
+        alert("Login successful")
         return data
 
     }catch(err:unknown){

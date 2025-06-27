@@ -1,9 +1,34 @@
 import React from 'react'
 import logo from '../../assets/Zhentryx.png'
 import img from '../../assets/Pictures/auth-img.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { loginUser } from '../Auth/authConfig'
+import { useState } from 'react'
 
 const Login:React.FC = () => {
+  const navigate = useNavigate()
+  const [formData, setFormData] = useState({email:"",password:""})
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
+    setFormData({...formData, [e.target.name]: e.target.value})
+  }
+
+  const handleSubmit = async (e:React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setError(null)
+    try{
+      await loginUser(formData.email,formData.password)
+      alert("Login successful")
+      navigate("/dashboard")
+    }catch(err:unknown){
+      setError(err instanceof Error ? err.message : "An error occurred")
+      alert("Login failed")
+      console.log("Login Error",err)
+    }
+  }
   return (
     <div className='font-["Poppins"]'>
        <img src={logo} alt="" className='w-[15%] ml-20' />
@@ -26,6 +51,8 @@ const Login:React.FC = () => {
                     type="email" 
                     name="email" 
                     id="email" 
+                    value={formData.email}
+                    onChange={handleChange}
                     placeholder='Enter your email'
                     className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1 rounded-[10px]" 
                   />
@@ -35,6 +62,8 @@ const Login:React.FC = () => {
                     type="password" 
                     name="password" 
                     id="password" 
+                    value={formData.password}
+                    onChange={handleChange}
                     placeholder='Enter your password'
                     className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1 rounded-[10px]" 
                   />
@@ -42,7 +71,10 @@ const Login:React.FC = () => {
                    <label htmlFor="remember" className='text-sm text-[#474747] ml-2 '>Remember me</label>
                    <Link to="/forgot-password" className="text-[#1B10A4] text-sm ml-36  ">Forgot Password?</Link>
 
-                    <button className='w-full bg-[#1B10A4] mt-6 text-white border-none py-[18px] px-6 rounded-[10px] cursor-pointer text-sm'>Sign In</button>
+                    <button className='w-full bg-[#1B10A4] mt-6 text-white border-none py-[18px] px-6 rounded-[10px] cursor-pointer text-sm' onClick={handleSubmit}>
+                      {loading ? "Logging in..." : "Sign In"}
+                    </button>
+
                     <div className="mt-4">
                       <p>Don't have an account? <Link to="/signup" className="text-[#1B10A4]">Sign Up</Link></p>
                     </div>

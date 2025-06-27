@@ -3,7 +3,7 @@ import React from "react"
 
 const isAuthenticated = () => {
     const token = localStorage.getItem("authToken")
-    return !!token
+    return !!token || !!sessionStorage.getItem("authToken")
 }
 
 const ProtectedRoute:React.FC = () => {

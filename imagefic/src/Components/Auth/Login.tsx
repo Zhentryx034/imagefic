@@ -7,7 +7,7 @@ import { useState } from 'react'
 
 const Login:React.FC = () => {
   const navigate = useNavigate()
-  const [formData, setFormData] = useState({email:"",password:""})
+  const [formData, setFormData] = useState({email:"",password:"", rememberMe:false})
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -20,7 +20,13 @@ const Login:React.FC = () => {
     setLoading(true)
     setError(null)
     try{
-      await loginUser(formData.email,formData.password)
+      const token =await loginUser(formData.email,formData.password)
+      if(formData.rememberMe){
+        localStorage.setItem("authToken", token)
+        console.log("Remember me is true, Token saved in localStorage")
+      }else{
+        sessionStorage.setItem("authToken", token)
+      }
       alert("Login successful")
       navigate("/dashboard")
     }catch(err:unknown){
@@ -67,7 +73,14 @@ const Login:React.FC = () => {
                     placeholder='Enter your password'
                     className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1 rounded-[10px]" 
                   />
-                   <input type="checkbox" name="remember" id="remember" className='w-4 h-4'/>
+                   <input 
+                   type="checkbox" 
+                   name="rememberMe" 
+                   id="rememberMe" 
+                   className='w-4 h-4'
+                   checked={formData.rememberMe}
+                   onChange={handleChange}
+                   />
                    <label htmlFor="remember" className='text-sm text-[#474747] ml-2 '>Remember me</label>
                    {/* <Link to="/forgot-password" className="text-[#1B10A4] text-sm ml-36  ">Forgot Password?</Link> */}
                    {error && <p className='text-red-500 text-sm mt-2'>{error}</p>}

@@ -35,10 +35,10 @@ const Navbar:React.FC = () => {
                         </p>
 
                         <div className='flex gap-4'>
-                        <button className='text-white  border-2 rounded w-40 h-12 bg-grey-500 '>
+                        <button className='text-white  border-2 rounded w-40 h-12 bg-grey-500 hover:bg-white hover:text-black '>
                         <Link to='/login'>LOG IN</Link> 
                         </button>
-                        <button className='text-white border-0 rounded w-40 h-12 bg-[#1B10A4] ' >
+                        <button className='text-white border-0 rounded w-40 h-12 bg-[#1B10A4] hover:bg-[#1B10A5]/80 ' >
                         <Link to='/signup'>SIGN UP </Link>
                         </button>
                         </div>

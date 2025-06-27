@@ -23,23 +23,37 @@ export async function  createUser (username:string, email:string,phone_number:nu
 
 export async function loginUser (email:string, password:string) {
     try{
-        const res = await fetch(`${API_BASE_URL}/api/login/`, {
+        const payload = { email, password }
+        console.log("Sending payload to Login API 🚀:", payload)    
+        const res = await fetch (`${API_BASE_URL}/api/login/`, {
             method: "POST", 
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({email, password})
+            body: JSON.stringify(payload)
         })
 
-        const data = await res.json()
+        // const data = await res.json()
+        const text = await res.text()
+        console.log("Login status:",res.status)
+        console.log('Raw Response:', text)
+        let data;
+        try{
+            data = JSON.parse(text)
+        }catch(jsonErr){
+            console.warn("Response is not valid JSON", jsonErr)
+            data = { message: text}
+        }
+
         if(!res.ok) throw new Error(data.message || "Login Failed")
 
             //this logic save the user login token in local storage
-        localStorage.setItem('authToken', data.token)
+        // localStorage.setItem('authToken', data.token)
         alert("Login successful")
         return data
 
     }catch(err:unknown){
+        alert("Login failed, something went wrong")
         console.log("Login Error", err)
         throw err
     }

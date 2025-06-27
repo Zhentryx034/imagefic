@@ -12,26 +12,34 @@ const Login:React.FC = () => {
   const [error, setError] = useState<string | null>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
-    setFormData({...formData, [e.target.name]: e.target.value})
+   const {name, type, value, checked} = e.target;
+   setFormData(prev => ({
+    ...prev,
+    [name]: type === "checkbox" ? checked : value
+   }))
   }
+
 
   const handleSubmit = async (e:React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setError(null)
+    console.log("Form data:", formData)
     try{
-      const token =await loginUser(formData.email,formData.password)
+       const data = await loginUser(formData.email,formData.password)
+      // const token = await loginUser(formData.email,formData.password)
+      // //save token to local storage or session storage based on remember me
       if(formData.rememberMe){
-        localStorage.setItem("authToken", token)
+        localStorage.setItem("authToken", data.token)
         console.log("Remember me is true, Token saved in localStorage")
       }else{
-        sessionStorage.setItem("authToken", token)
+        sessionStorage.setItem("authToken", data.token)
+        console.log("Remember me is false, Token saved in sessionStorage")
       }
-      alert("Login successful")
+
       navigate("/dashboard")
     }catch(err:unknown){
       setError(err instanceof Error ? err.message : "An error occurred")
-      alert("Login failed")
       console.log("Login Error",err)
     }
   }

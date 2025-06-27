@@ -3,7 +3,7 @@ const API_BASE_URL = "https://backend-imagfic.onrender.com"
 
 export async function  createUser (username:string, email:string,phone_number:number,password:string,confirm_password:string)   {
     try{
-        const res = await fetch (`${API_BASE_URL}/api/register`, {
+        const res = await fetch (`${API_BASE_URL}/api/register/`, {
             method: 'POST',
             headers:{
                 "Content-Type": "application/json"
@@ -23,7 +23,7 @@ export async function  createUser (username:string, email:string,phone_number:nu
 
 export async function loginUser (email:string, password:string) {
     try{
-        const res = await fetch(`${API_BASE_URL}/api/login`, {
+        const res = await fetch(`${API_BASE_URL}/api/login/`, {
             method: "POST", 
             headers: {
                 "Content-Type": "application/json",
@@ -51,7 +51,7 @@ export async function logOutUser(){
     const token = localStorage.getItem('authToken')
     if(!token) throw new Error("No token found")
 
-    const res = await fetch(`${API_BASE_URL}/api/login`, {
+    const res = await fetch(`${API_BASE_URL}/api/login/`, {
         method: "POST",
         headers: {
             Authorization: `Bearer ${token}`

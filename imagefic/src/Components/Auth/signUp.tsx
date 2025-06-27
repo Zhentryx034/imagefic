@@ -3,8 +3,10 @@ import logo from '../../assets/Zhentryx.png'
 import img from '../../assets/Pictures/auth-img.png'
 import { Link } from 'react-router-dom'
 import { createUser } from './authConfig'
+import { useNavigate } from 'react-router-dom'
 
 const SignUp:React.FC = () => {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -42,6 +44,7 @@ const SignUp:React.FC = () => {
         formData.confirm_password
       )
       alert('Registration Successful') 
+      navigate("/login")
       
     } catch (err: unknown){
       if (err instanceof Error) {

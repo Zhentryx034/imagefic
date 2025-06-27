@@ -63,16 +63,16 @@ const Navbar:React.FC = () => {
             </p>
             
             <div className='grid grid-cols-2 sm:grid-cols-1 md:grid-cols-3 gap-4 mb-6'>
-                <img src={image1} alt="" className=' h-auto' />
-                <img src={image2} alt="" className=' h-auto' />
-                <img src={image3}  alt="" className=' ' />
-                <img src={image4} alt="" className=' h-auto' />
-                <img src={image5} alt="" className=' h-auto' />
-                <img src={image6}  alt=""  className=' h-auto'/>
+                <img src={image1} alt="" className=' h-auto sm:w-full md:w-full lg:w-full xl:w-full' />
+                <img src={image2} alt="" className=' h-auto sm:w-full md:w-full lg:w-full xl:w-full' />
+                <img src={image3}  alt="" className=' sm:w-full md:w-full lg:w-full xl:w-full' />
+                <img src={image4} alt="" className=' h-auto sm:w-full md:w-full lg:w-full xl:w-full' />
+                <img src={image5} alt="" className=' h-auto sm:w-full md:w-full lg:w-full xl:w-full' />
+                <img src={image6}  alt=""  className=' h-auto sm:w-full md:w-full lg:w-full xl:w-full'/>
                 </div>                
                 
                 <div className='flex flex-col lg:flex-row gap-12 items-center justify-center mt-20'>
-                    <img src={image8} alt=""  className=' -ml-[18rem]  '/>
+                    <img src={image8} alt=""  className=' -ml-[18rem] sm:ml-0  '/>
                     <div className='mt-[30rem] sm:mt-0' >
                         <h4 className='font-roboto font-bold text-3xl sm:text-4xl md:text-5xl '>
                         See it, Create it, <br />

@@ -70,6 +70,7 @@ const Login:React.FC = () => {
                    <input type="checkbox" name="remember" id="remember" className='w-4 h-4'/>
                    <label htmlFor="remember" className='text-sm text-[#474747] ml-2 '>Remember me</label>
                    <Link to="/forgot-password" className="text-[#1B10A4] text-sm ml-36  ">Forgot Password?</Link>
+                   {error && <p className='text-red-500 text-sm mt-2'>{error}</p>}
 
                     <button className='w-full bg-[#1B10A4] mt-6 text-white border-none py-[18px] px-6 rounded-[10px] cursor-pointer text-sm' onClick={handleSubmit}>
                       {loading ? "Logging in..." : "Sign In"}

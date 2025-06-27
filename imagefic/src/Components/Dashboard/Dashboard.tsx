@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import DashboardNav from './DashboardNav';
+import { useNavigate } from 'react-router-dom';
 import img1 from '../../assets/Pictures/dashboard images/dashboard-img (1).png'
 import img2 from '../../assets/Pictures/dashboard images/dashboard-img (6).png'
 import img3 from '../../assets/Pictures/dashboard images/dashboard-img (5).png' 
@@ -10,6 +11,7 @@ import Card from './Card';
 
 
 const Dashboard: React.FC = () => {
+    const navigate = useNavigate()
     const items = [
         { id: 1, img: img1, title: "Presentation", link: "/presentation" },
         { id: 2, img: img2, title: "Cars", link: "/cars" },
@@ -18,6 +20,18 @@ const Dashboard: React.FC = () => {
         { id: 5, img: img5, title: "Sport", link: "/sport" },
         { id: 6, img: img6, title: "Nature", link: "/nature" }
     ]
+
+    useEffect(()=>{
+        //this logic check authentication immediately when component mounts
+        if(!localStorage.getItem("authToken")){
+            navigate('/login', {replace: true})
+        }
+    }, [navigate])
+
+    // if not authenticated, don't render anything
+    if(!localStorage.getItem("authToken")){{
+        return null
+    }}
   return (
      <div className='font-["Poppins"] bg-white h-screen'>
        <DashboardNav />

@@ -10,6 +10,7 @@ import image5 from '../assets/Pictures/image5.png'
 import image6 from '../assets/Pictures/image6.png'
 import image8 from '../assets/Pictures/image8.png'
 import { Link } from 'react-router-dom';
+import Footer from './Footer'
 
 
 const Navbar:React.FC = () => {
@@ -72,17 +73,17 @@ const Navbar:React.FC = () => {
                 
                 <div className='flex flex-col lg:flex-row gap-12 items-center justify-center mt-20'>
                     <img src={image8} alt=""  className=' -ml-[18rem]  '/>
-                    <div className='mt-[30rem] ' >
-                    <h4 className='font-roboto font-bold text-3xl sm:text-4xl md:text-5xl '>
-                    See it, Create it, <br />
-                    Try it, Do it
-                    </h4>
-                    <p className='font-roboto text-lg sm:text-base mt-3 '>
-                        The Best Part of Gallery is <br /> discoving images and ideas <br /> from all over the world
-                    </p>
-                    <button className='text-white border-2 rounded w-[11rem] h-12 mt-4 font-roboto font-semibold bg-[#DB02DC] border-none'>
-                    Explore
-                </button>
+                    <div className='mt-[30rem] sm:mt-0' >
+                        <h4 className='font-roboto font-bold text-3xl sm:text-4xl md:text-5xl '>
+                        See it, Create it, <br />
+                        Try it, Do it
+                        </h4>
+                        <p className='font-roboto text-lg sm:text-base mt-3 '>
+                            The Best Part of Gallery is <br /> discoving images and ideas <br /> from all over the world
+                        </p>
+                        <button className='text-white border-2 rounded w-[11rem] h-12 mt-4 font-roboto font-semibold bg-[#DB02DC] hover:bg-[#DB02DC]/70 border-none'>
+                        Explore
+                    </button>
                     </div>
                     
                 </div>
@@ -93,6 +94,7 @@ const Navbar:React.FC = () => {
         </div>
 
       </section>
+      <Footer />
     </section>
         
 

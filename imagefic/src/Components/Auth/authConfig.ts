@@ -1,5 +1,6 @@
 const API_BASE_URL = "https://backend-imagfic.onrender.com"
-
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
 
 export async function  createUser (username:string, email:string,phone_number:number,password:string,confirm_password:string)   {
     try{
@@ -10,13 +11,18 @@ export async function  createUser (username:string, email:string,phone_number:nu
             },
             body: JSON.stringify({username,email,phone_number,password,confirm_password})
         })
-
+       
         const data = await res.json();
         if(!res.ok) throw new Error(data.message || "Registration failed")
             return data
-
+ toast.success('Registration Sucessful')
     }catch(err:unknown){
-        console.log("Register Error",err)
+        let errorMsg = "Registration failed, something went wrong"
+        if(err instanceof Error && err.message){
+            errorMsg = err.message
+        }
+        toast.error(errorMsg)
+        // console.log("Register Error",err)
         throw err
     }
 }
@@ -24,7 +30,7 @@ export async function  createUser (username:string, email:string,phone_number:nu
 export async function loginUser (email:string, password:string) {
     try{
         const payload = { email, password }
-        console.log("Sending payload to Login API 🚀:", payload)    
+        // console.log("Sending payload to Login API 🚀:", payload)    
         const res = await fetch (`${API_BASE_URL}/api/login/`, {
             method: "POST", 
             headers: {
@@ -35,9 +41,10 @@ export async function loginUser (email:string, password:string) {
 
         // const data = await res.json()
         const text = await res.text()
-        console.log("Login status:",res.status)
-        console.log('Raw Response:', text)
+        // console.log("Login status:",res.status)
+        // console.log('Raw Response:', text)
         let data;
+
         try{
             data = JSON.parse(text)
         }catch(jsonErr){
@@ -49,12 +56,19 @@ export async function loginUser (email:string, password:string) {
 
             //this logic save the user login token in local storage
         // localStorage.setItem('authToken', data.token)
-        alert("Login successful")
+        // alert("Login successful")
+        toast.success('Login Successful')
         return data
 
     }catch(err:unknown){
-        alert("Login failed, something went wrong")
-        console.log("Login Error", err)
+        
+        let errorMsg = "Login failed, something went wrong"
+        if(err instanceof Error && err.message){
+            errorMsg = err.message
+        }
+        toast.error(errorMsg)
+        // alert("Login failed, something went wrong")
+        // console.log("Login Error", err)
         throw err
     }
  

@@ -5,6 +5,10 @@ import { Link } from 'react-router-dom'
 import { createUser } from './authConfig'
 import { useNavigate } from 'react-router-dom'
 
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify'
+ import { toast } from 'react-toastify'
+
 const SignUp:React.FC = () => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
@@ -31,6 +35,7 @@ const SignUp:React.FC = () => {
     setError(null)
     if(formData.password !== formData.confirm_password) {
         setError("Passwords do not match");
+        toast.error(error)
         throw new Error("Passwords do not match");
         return; 
       }
@@ -49,6 +54,8 @@ const SignUp:React.FC = () => {
     } catch (err: unknown){
       if (err instanceof Error) {
         setError(err.message || "Something went Wrong")
+        toast.error (err.message || 'Something went wrong')
+       
       } else {
         setError("Something went Wrong")
       }
@@ -60,6 +67,7 @@ const SignUp:React.FC = () => {
 
   return (
     <div className='font-["Poppins"]'>
+      <ToastContainer />
        <img src={logo} alt="" className='w-[15%] ml-20' />
 
        <div className="flex flex-col md:flex-row border border-gray-200">
@@ -115,13 +123,14 @@ const SignUp:React.FC = () => {
                     type="password" 
                     name="confirm_password" 
                     id="confirmPassword" 
+                    required
                     value={formData.confirm_password}
                     onChange={handleChange}
                     placeholder='Enter your password'
                     className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1 rounded-[10px]" 
                   />
-                  { error && <p className='text-red-500 mb-4'> {error}</p>}
-                    <button className='w-full bg-[#1B10A4] text-white border-none py-[18px] px-6 rounded-[10px] cursor-pointer text-sm' disabled={loading} onClick={handleSubmit}>{loading ? "Signing up.....": "Sign Up"}</button>
+            
+                    <button type='submit' className='w-full bg-[#1B10A4] text-white border-none py-[18px] px-6 rounded-[10px] cursor-pointer text-sm' disabled={loading} onClick={handleSubmit}>{loading ? "Signing up.....": "Sign Up"}</button>
                     <div className="mt-4">
                       <p>Already a Member? <Link to="/login" className="text-[#1B10A4]">Login</Link></p>
                     </div>

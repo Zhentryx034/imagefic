@@ -4,12 +4,16 @@ import img from '../../assets/Pictures/auth-img.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { loginUser } from '../Auth/authConfig'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify'
+
 
 const Login:React.FC = () => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({email:"",password:"", rememberMe:false})
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  // const [error, setError] = useState<string | null>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
    const {name, type, value, checked} = e.target;
@@ -23,28 +27,32 @@ const Login:React.FC = () => {
   const handleSubmit = async (e:React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    setError(null)
-    console.log("Form data:", formData)
+    // setError(null)
+    // console.log("Form data:", formData)
     try{
        const data = await loginUser(formData.email,formData.password)
       // const token = await loginUser(formData.email,formData.password)
       // //save token to local storage or session storage based on remember me
       if(formData.rememberMe){
         localStorage.setItem("authToken", data.token)
-        console.log("Remember me is true, Token saved in localStorage")
+        // console.log("Remember me is true, Token saved in localStorage")
       }else{
         sessionStorage.setItem("authToken", data.token)
-        console.log("Remember me is false, Token saved in sessionStorage")
+        // console.log("Remember me is false, Token saved in sessionStorage")
       }
 
       navigate("/dashboard")
+    
     }catch(err:unknown){
-      setError(err instanceof Error ? err.message : "An error occurred")
-      console.log("Login Error",err)
+      // setError(err instanceof Error ? err.message : "An error occurred")
+      // console.log("Login Error",err)
+       toast.error(err)
+     
     }
   }
   return (
     <div className='font-["Poppins"]'>
+      <ToastContainer />
        <img src={logo} alt="" className='w-[15%] ml-20' />
 
        <div className="flex flex-col md:flex-row border border-gray-200">
@@ -91,7 +99,7 @@ const Login:React.FC = () => {
                    />
                    <label htmlFor="remember" className='text-sm text-[#474747] ml-2 '>Remember me</label>
                    {/* <Link to="/forgot-password" className="text-[#1B10A4] text-sm ml-36  ">Forgot Password?</Link> */}
-                   {error && <p className='text-red-500 text-sm mt-2'>{error}</p>}
+                   
 
                     <button className='w-full bg-[#1B10A4] mt-6 text-white border-none py-[18px] px-6 rounded-[10px] cursor-pointer text-sm' onClick={handleSubmit}>
                       {loading ? "Logging in..." : "Sign In"}

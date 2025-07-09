@@ -20,7 +20,7 @@ const Hero: React.FC = () => {
         />
       </div>
      
-      <div className="relative z-20 h-full flex flex-row items-center justify-center px-4 sm:px-6 md:px-12 lg:px-24">
+      <div className="relative z-20 h-full flex flex-row items-center justify-start mt-28 px-4 sm:px-6 md:px-12 lg:px-24">
         <div className="text-white text-left max-w-xl mt-10 sm:mt-16 lg:mt-0 w-full">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-castoro leading-tight">
             GALLERY OF<br />LIFE AND DEATH

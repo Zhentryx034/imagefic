@@ -32,6 +32,7 @@ const Login:React.FC = () => {
     try{
        const data = await loginUser(formData.email,formData.password)
       // const token = await loginUser(formData.email,formData.password)
+      
       // //save token to local storage or session storage based on remember me
       if(formData.rememberMe){
         localStorage.setItem("authToken", data.token)
@@ -41,12 +42,17 @@ const Login:React.FC = () => {
         // console.log("Remember me is false, Token saved in sessionStorage")
       }
 
-      navigate("/dashboard")
+      localStorage.setItem('authToken', data.token)
+      sessionStorage.setItem('authToken', data.token)
+      toast.success('Login Successful')
+       navigate("/dashboard")
+
+    
     
     }catch(err:unknown){
       // setError(err instanceof Error ? err.message : "An error occurred")
-      // console.log("Login Error",err)
-       toast.error(err)
+      console.log("Login Error",err)
+       toast.error("Login failed. Please check your credentials and try again.")
      
     }
   }

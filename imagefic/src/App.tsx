@@ -7,7 +7,9 @@ import SignUp from './Components/Auth/signUp'
 import Login from './Components/Auth/Login'
 import Dashboard from './Components/Dashboard/Dashboard'
 import Cars from './Components/Dashboard/Cars'
+
 import ProtectedRoute from './Components/ProtectedRoute'
+import Nature from './Components/Dashboard/Nature'
 
 
 const App: React.FC= ()=> {
@@ -21,6 +23,7 @@ const App: React.FC= ()=> {
       <Route path='/dashboard' element={<Dashboard />} />
       </Route>
        <Route path='/cars' element={<Cars />} />
+       <Route path='/nature' element= {<Nature />} />
     </Routes>
 
   )

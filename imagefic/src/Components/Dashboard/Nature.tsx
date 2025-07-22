@@ -52,7 +52,7 @@ console.log("Nature images:", images.map((img, id)=> ({id, img})));
             <img key={idx} src={img} alt={`Nature ${idx + 1}`} className="mt-8 w-full max-w-md rounded-lg shadow-lg" />
           ))
         ) : (
-          <p className="mt-8 text-green-500">Loading Images.... </p>
+          <p className="mt-8 text-green-700">Loading Images.... </p>
         )}
             </div>
     </div>

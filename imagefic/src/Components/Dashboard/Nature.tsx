@@ -6,22 +6,39 @@ const Nature:React.FC = () => {
     const [images, setImages] = useState<string[]>([]);
  const API_BASE_URL = "https://backend-imagfic.onrender.com"
 
-    useEffect(() => {
-       fetch(`${API_BASE_URL}/api/v1/categories/1/images/`)
-       .then(res => res.json())
-       .then(data => {
-        console.log('Here is the',data)
-        if(Array.isArray(data)) {
-          setImages(data.map((item) => item.image)[0]);
-        } else {
-          console.error("No image found in response", data);
-        }
-       })
-       .catch(err => {
-        console.error("Error fetching nature images:", err);
-        // setImages(null); // Set to null if there's an error
-       })
-    }, []);
+  useEffect(() => {
+  const token =
+    localStorage.getItem("access_token") || sessionStorage.getItem("access_token");
+
+  if (!token) {
+    console.error("No token found");
+    return;
+  }
+
+  fetch(`${API_BASE_URL}/api/v1/categories/1/images/`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      return res.json();
+    })
+    .then((data) => {
+      console.log("Here is the", data);
+      if (Array.isArray(data)) {
+        setImages(data.map((item) => item.image_file));
+      } else {
+        console.error("No image found in response", data);
+      }
+    })
+    .catch((err) => {
+      console.error("Error fetching nature images:", err);
+    });
+}, []);
+
 
   return (
     <div>

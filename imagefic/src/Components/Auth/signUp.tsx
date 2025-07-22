@@ -48,10 +48,11 @@ const SignUp:React.FC = () => {
         formData.password,
         formData.confirm_password
       )
-      alert('Registration Successful') 
+      toast.success('Registration Successful') 
       navigate("/login")
       
     } catch (err: unknown){
+      setLoading(false)
       if (err instanceof Error) {
         setError(err.message || "Something went Wrong")
         toast.error (err.message || 'Something went wrong')

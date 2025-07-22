@@ -1,4 +1,3 @@
-import React from 'react'
 import logo from '../../assets/Zhentryx.png'
 import img from '../../assets/Pictures/auth-img.png'
 import { Link, useNavigate } from 'react-router-dom'
@@ -7,9 +6,11 @@ import { useState } from 'react'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
+import { useAuth } from './context/AuthContext'
 
 
 const Login:React.FC = () => {
+  const {login } = useAuth()
   const navigate = useNavigate()
   const [formData, setFormData] = useState({email:"",password:"", rememberMe:false})
   const [loading, setLoading] = useState(false)
@@ -34,26 +35,26 @@ const Login:React.FC = () => {
       // const token = await loginUser(formData.email,formData.password)
       
       // //save token to local storage or session storage based on remember me
-      if(formData.rememberMe){
-        localStorage.setItem("authToken", data.token)
-        // console.log("Remember me is true, Token saved in localStorage")
-      }else{
-        sessionStorage.setItem("authToken", data.token)
-        // console.log("Remember me is false, Token saved in sessionStorage")
-      }
+      if (formData.rememberMe) {
+  localStorage.setItem('access_token', data.access);
+  localStorage.setItem('refresh_token', data.refresh);
+} else {
+  sessionStorage.setItem('access_token', data.access);
+  sessionStorage.setItem('refresh_token', data.refresh);
+}
 
-      localStorage.setItem('authToken', data.token)
-      sessionStorage.setItem('authToken', data.token)
+
+     
+     login(data.access, data.refresh, formData.rememberMe)
       toast.success('Login Successful')
        navigate("/dashboard")
 
     
-    
     }catch(err:unknown){
       // setError(err instanceof Error ? err.message : "An error occurred")
       console.log("Login Error",err)
+      setLoading(false)
        toast.error("Login failed. Please check your credentials and try again.")
-     
     }
   }
   return (

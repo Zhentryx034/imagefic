@@ -39,6 +39,7 @@ const Nature:React.FC = () => {
     });
 }, []);
 
+console.log("Nature images:", images.map((img, id)=> ({id, img})));
 
   return (
     <div>

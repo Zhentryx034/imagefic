@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 export async function  createUser (username:string, email:string,phone_number:number,password:string,confirm_password:string)   {
     try{
-        const res = await fetch (`${API_BASE_URL}/api/register/`, {
+        const res = await fetch (`${API_BASE_URL}/api/v1/register/`, {
             method: 'POST',
             headers:{
                 "Content-Type": "application/json"
@@ -31,7 +31,7 @@ export async function loginUser (email:string, password:string) {
     try{
         const payload = { email, password }
         // console.log("Sending payload to Login API 🚀:", payload)    
-        const res = await fetch (`${API_BASE_URL}/api/login/`, {
+        const res = await fetch (`${API_BASE_URL}/api/v1/login/`, {
             method: "POST", 
             headers: {
                 "Content-Type": "application/json",
@@ -63,12 +63,16 @@ export async function loginUser (email:string, password:string) {
     }catch(err:unknown){
         
         let errorMsg = "Login failed, something went wrong"
+        // if(err instanceof Error && err.message){
+        //    err.message
+        // }
+        // toast.error(errorMsg)
+        // alert("Login failed, something went wrong")
+        // console.log("Login Error", err)
         if(err instanceof Error && err.message){
             errorMsg = err.message
         }
-        toast.error(errorMsg)
-        // alert("Login failed, something went wrong")
-        // console.log("Login Error", err)
+        console.log("Login Error", errorMsg)
         throw err
     }
  
@@ -79,7 +83,7 @@ export async function logOutUser(){
     const token = localStorage.getItem('authToken')
     if(!token) throw new Error("No token found")
 
-    const res = await fetch(`${API_BASE_URL}/api/login/`, {
+    const res = await fetch(`${API_BASE_URL}/api/v1/logout/`, {
         method: "POST",
         headers: {
             Authorization: `Bearer ${token}`

@@ -11,6 +11,7 @@ import Cars from './Components/Dashboard/Cars'
 import ProtectedRoute from './Components/ProtectedRoute'
 import { AuthProvider } from './Components/Auth/context/AuthContext'
 import Nature from './Components/Dashboard/Nature'
+import CategoryPage from './Components/Dashboard/CategoryPage'
 
 
 const App: React.FC= ()=> {
@@ -26,6 +27,7 @@ const App: React.FC= ()=> {
         </Route>
         <Route path='/cars' element={<Cars />} />
         <Route path='/nature' element= {<Nature />} />
+        {/* <Route path='/category/:id' element={<CategoryPage />} /> */}
     </Routes>
       </AuthProvider>
 

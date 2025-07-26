@@ -30,7 +30,9 @@ const Login:React.FC = () => {
     setLoading(true)
     try{
        const data = await loginUser(formData.email,formData.password)
-  
+      localStorage.setItem("authToken", data.access)
+      sessionStorage.setItem("authToken", data.access)
+      
       if (formData.rememberMe) {
         localStorage.setItem('access_token', data.access);
         localStorage.setItem('refresh_token', data.refresh);

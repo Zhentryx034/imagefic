@@ -8,13 +8,21 @@ const CategoryPage: React.FC = () => {
 
     useEffect(() => {
          // Fetch category name (optional)
-   fetch(`https://backend-imagfic.onrender.com/api/v1/categories/${id}/`)
+   fetch(`https://backend-imagfic.onrender.com/api/v1/categories/${id}/`, {
+        headers: {
+        Authorization: `Bearer ${localStorage.getItem("authToken") || sessionStorage.getItem("authToken")}`,
+        },
+   })
      .then(res => res.json())
      .then(data => setCategoryName(data.name))
      .catch(() => setCategoryName('Category'));
 
    // Fetch images for this category
-   fetch(`https://backend-imagfic.onrender.com/api/v1/categories/${id}/images/`)
+   fetch(`https://backend-imagfic.onrender.com/api/v1/categories/${id}/images/`, {
+        headers: {
+        Authorization: `Bearer ${localStorage.getItem("authToken") || sessionStorage.getItem("authToken")}`,
+        },
+   })
      .then(res => res.json())
      .then(data => {
        if (Array.isArray(data)) {
@@ -32,7 +40,7 @@ const CategoryPage: React.FC = () => {
          ))
        ) : (
          <p>No images available for this category.</p>
-       )}
+       ) }
      </div>
    </div>
         )

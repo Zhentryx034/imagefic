@@ -26,10 +26,16 @@ const Dashboard: React.FC = () => {
         //this logic check authentication immediately when component mounts
         if(!localStorage.getItem("authToken")){
             navigate('/login', {replace: true})
+            return;
         }
 
         //This logic fetches categories from the server
-        fetch('https://backend-imagfic.onrender.com/api/v1/categories/')
+        fetch('https://backend-imagfic.onrender.com/api/v1/categories/', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("authToken") || sessionStorage.getItem("authToken")}`
+            }
+        })
+
         .then(res =>res.json())
         .then(data => {
             console.log("Categories fetched successfully", data)

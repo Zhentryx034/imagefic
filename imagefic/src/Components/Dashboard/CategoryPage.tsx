@@ -8,7 +8,7 @@ const CategoryPage: React.FC = () => {
 
     useEffect(() => {
          // Fetch category name (optional)
-         console.log("Fetching category with ID:", id)
+        
    fetch(`https://backend-imagfic.onrender.com/api/v1/categories/${id}/`, {
         headers: {
         Authorization: `Bearer ${localStorage.getItem("authToken") || sessionStorage.getItem("authToken")}`,

@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import DashboardNav from './DashboardNav';
 import { useNavigate } from 'react-router-dom';
-import img1 from '../../assets/Pictures/dashboard images/dashboard-img (1).png'
-import img2 from '../../assets/Pictures/dashboard images/dashboard-img (6).png'
-import img3 from '../../assets/Pictures/dashboard images/dashboard-img (5).png' 
-import img4 from '../../assets/Pictures/dashboard images/dashboard-img (4).png'
-import img5 from '../../assets/Pictures/dashboard images/dashboard-img (3).png'
-import img6 from '../../assets/Pictures/dashboard images/dashboard-img (2).png'
+ import img1 from '../../assets/Pictures/dashboard images/dashboard-img (1).png'
+// import img2 from '../../assets/Pictures/dashboard images/dashboard-img (6).png'
+// import img3 from '../../assets/Pictures/dashboard images/dashboard-img (5).png' 
+// import img4 from '../../assets/Pictures/dashboard images/dashboard-img (4).png'
+// import img5 from '../../assets/Pictures/dashboard images/dashboard-img (3).png'
+// import img6 from '../../assets/Pictures/dashboard images/dashboard-img (2).png'
 import Card from './Card';
 
 
 const Dashboard: React.FC = () => {
     const [categories, setCategories] = useState<{id:number, name: string}[]>([])
     const navigate = useNavigate()
-    const items = [
-        { id: 1, img: img1, title: "Presentation", link: "/presentation" },
-        // { id: 2, img: img2, title: "Cars", link: "/cars" },
-        // { id: 3, img: img3, title: "Illustration", link: "/illustration" },
-        // { id: 4, img: img4, title: "Art", link: "/art" },
-        // { id: 5, img: img5, title: "Sport", link: "/sport" },
-        // { id: 6, img: img6, title: "Nature", link: "/nature" }
-    ]
+    // const items = [
+    //     { id: 1, img: img1, title: "Presentation", link: "/presentation" },
+    //     // { id: 2, img: img2, title: "Cars", link: "/cars" },
+    //     // { id: 3, img: img3, title: "Illustration", link: "/illustration" },
+    //     // { id: 4, img: img4, title: "Art", link: "/art" },
+    //     // { id: 5, img: img5, title: "Sport", link: "/sport" },
+    //     // { id: 6, img: img6, title: "Nature", link: "/nature" }
+    // ]
 
     useEffect(()=>{
         //this logic check authentication immediately when component mounts
@@ -31,7 +31,15 @@ const Dashboard: React.FC = () => {
         //This logic fetches categories from the server
         fetch('https://backend-imagfic.onrender.com/api/v1/categories/')
         .then(res =>res.json())
-        .then(data => setCategories(data))
+        .then(data => {
+            console.log("Categories fetched successfully", data)
+            if(Array.isArray(data)){
+                setCategories(data)
+            }else{
+                setCategories([]) // fallback to empty array
+                console.error("API did not return an array:", data)
+            }
+        })
         .catch(err => console.error("Error Fetching categories", err))
     }, [navigate])
 

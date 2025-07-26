@@ -14,6 +14,7 @@ import Nature from './Components/Dashboard/Nature'
 import CategoryPage from './Components/Dashboard/CategoryPage'
 
 
+
 const App: React.FC= ()=> {
   return(
       <AuthProvider>
@@ -27,7 +28,7 @@ const App: React.FC= ()=> {
         </Route>
         <Route path='/cars' element={<Cars />} />
         <Route path='/nature' element= {<Nature />} />
-        {/* <Route path='/category/:id' element={<CategoryPage />} /> */}
+        <Route path='/category/:id' element={<CategoryPage />} />
     </Routes>
       </AuthProvider>
 

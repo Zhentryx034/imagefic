@@ -27,7 +27,7 @@ export async function  createUser (username:string, email:string,phone_number:nu
     }
 }
 
-export async function loginUser (email:string, password:string) {
+export async function loginUser (email:string, password:string, signal?: AbortSignal) {
     try{
         const payload = { email, password }
         // console.log("Sending payload to Login API 🚀:", payload)    
@@ -36,7 +36,10 @@ export async function loginUser (email:string, password:string) {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(payload)
+            body: JSON.stringify(payload),
+            signal: signal, // Add support for AbortSignal to allow timeout
+            // Add credentials option to enable cookies if needed
+            credentials: 'same-origin'
         })
 
         // const data = await res.json()
@@ -61,6 +64,10 @@ export async function loginUser (email:string, password:string) {
         return data
 
     }catch(err:unknown){
+        // Check if this is an abort error (timeout)
+        if (err instanceof DOMException && err.name === 'AbortError') {
+            throw new Error('Aborted')
+        }
         
         let errorMsg = "Login failed, something went wrong"
         // if(err instanceof Error && err.message){

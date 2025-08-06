@@ -26,11 +26,17 @@ const DashboardNav: React.FC = () => {
     <nav>
       <ToastContainer />
       <div className='flex justify-between items-center bg-white p-4 shadow-md fixed top-0 left-0 right-0 z-50 h-24'>
-        <Link to='/' className='w-full'><img src={logo} alt="Zhentryx logo" className='w-[10%] ml-20' /></Link>
-        <div className='flex items-center space-x-4 font-semibold cursor-pointer text-[#333] mr-12'>
-            <p className='hover:text-purple-600 hover:scale-105'>Home</p>
-            <p className='hover:text-purple-600 hover:scale-105'>Explore</p>
-            <p className='hover:text-purple-600 hover:scale-105'>Create</p>
+        <Link to='/' className='flex items-center'>
+          <img 
+            src={logo} 
+            alt="Zhentryx logo" 
+            className='w-[120px] md:w-[150px] lg:w-[180px] ml-4 md:ml-8 lg:ml-20 transition-all duration-300' 
+          />
+        </Link>
+        <div className='flex items-center space-x-4 font-semibold cursor-pointer text-[#333] mr-4 md:mr-8 lg:mr-12'>
+            <Link to='/dashboard' className='hover:text-purple-600 hover:scale-105 transition-all duration-200'>Home</Link>
+            <p className='hover:text-purple-600 hover:scale-105 transition-all duration-200'>Explore</p>
+            <p className='hover:text-purple-600 hover:scale-105 transition-all duration-200'>Create</p>
             <div className="relative">
               <FaUserCircle 
                 size={40} 

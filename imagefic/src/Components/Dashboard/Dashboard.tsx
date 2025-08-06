@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import DashboardNav from './DashboardNav';
 import { useNavigate } from 'react-router-dom';
-import img1 from '../../assets/Pictures/dashboard-images/dashboard-img (1).png'
-import img2 from '../../assets/Pictures/dashboard-images/dashboard-img (6).png'
-import img3 from '../../assets/Pictures/dashboard-images/dashboard-img (5).png' 
-import img4 from '../../assets/Pictures/dashboard-images/dashboard-img (4).png'
-import img5 from '../../assets/Pictures/dashboard-images/dashboard-img (3).png'
-import img6 from '../../assets/Pictures/dashboard-images/dashboard-img (2).png'
+
+// Using placeholder images to avoid path issues
+const categoryImages: Record<string, string> = {
+    'Presentation': 'https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=Presentation',
+    'Cars': 'https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=Cars',
+    'Illustration': 'https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=Illustration',
+    'Art': 'https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=Art',
+    'Sport': 'https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=Sport',
+    'Nature': 'https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=Nature',
+    'test': 'https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=Category'
+};
 
 import Card from './Card';
-
 
 const Dashboard: React.FC = () => {
     const [categories, setCategories] = useState<{id:number, name: string}[]>([])
@@ -33,7 +37,7 @@ const Dashboard: React.FC = () => {
         //This logic fetches categories from the server
         fetch('https://backend-imagfic.onrender.com/api/v1/categories/', {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("authToken") || sessionStorage.getItem("authToken")}`
+                Authorization: `Bearer ${localStorage.getItem("access_token") || sessionStorage.getItem("access_token")}`
             }
         })
 

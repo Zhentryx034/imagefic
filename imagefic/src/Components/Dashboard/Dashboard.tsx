@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import DashboardNav from './DashboardNav';
 import { useNavigate } from 'react-router-dom';
-import img1 from '../../assets/Pictures/dashboard images/dashboard-img (1).png'
-import img2 from '../../assets/Pictures/dashboard images/dashboard-img (6).png'
-import img3 from '../../assets/Pictures/dashboard images/dashboard-img (5).png' 
-import img4 from '../../assets/Pictures/dashboard images/dashboard-img (4).png'
-import img5 from '../../assets/Pictures/dashboard images/dashboard-img (3).png'
-import img6 from '../../assets/Pictures/dashboard images/dashboard-img (2).png'
+import img1 from '../../assets/Pictures/dashboard-images/dashboard-img (1).png'
+import img2 from '../../assets/Pictures/dashboard-images/dashboard-img (6).png'
+import img3 from '../../assets/Pictures/dashboard-images/dashboard-img (5).png' 
+import img4 from '../../assets/Pictures/dashboard-images/dashboard-img (4).png'
+import img5 from '../../assets/Pictures/dashboard-images/dashboard-img (3).png'
+import img6 from '../../assets/Pictures/dashboard-images/dashboard-img (2).png'
 import Card from './Card';
 
 

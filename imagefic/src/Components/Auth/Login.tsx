@@ -2,7 +2,7 @@ import logo from '../../assets/Zhentryx.png'
 import img from '../../assets/Pictures/auth-img.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { loginUser } from '../Auth/authConfig'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
@@ -16,7 +16,32 @@ const Login:React.FC = () => {
   const [formData, setFormData] = useState({email:"",password:"", rememberMe:false})
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
-  // const [error, setError] = useState<string | null>(null)
+  const [apiStatus, setApiStatus] = useState<'idle' | 'connecting' | 'ready'>('idle')
+  
+  // Ping the API when component mounts to wake up the server
+  useEffect(() => {
+    const warmupApi = async () => {
+      try {
+        setApiStatus('connecting')
+        // Simple ping to wake up the server
+        await fetch('https://backend-imagfic.onrender.com/api/v1/categories/', { 
+          method: 'HEAD',
+          // Timeout after 5 seconds
+          signal: AbortSignal.timeout(5000)
+        }).catch(() => {
+          // Silently catch any errors - the main goal is just to wake up the server
+          console.log('API warmup completed')
+        })
+        setApiStatus('ready')
+      } catch (err) {
+        // Even if ping fails, still mark as ready to allow login attempts
+        console.log('API warmup failed, but proceeding anyway')
+        setApiStatus('ready')
+      }
+    }
+    
+    warmupApi()
+  }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
    const {name, type, value, checked} = e.target;
@@ -31,13 +56,19 @@ const Login:React.FC = () => {
     e.preventDefault()
     setLoading(true)
     
+    // Show an immediate toast that login is in progress
+    const loginToast = toast.loading('Logging in... Please wait')
+    
     try{
-      // Call login API
-      const data = await loginUser(formData.email, formData.password)
+      // Call login API with timeout
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 20000) // 20 second timeout
+      
+      const data = await loginUser(formData.email, formData.password, controller.signal)
+      
+      clearTimeout(timeoutId)
       
       // Store tokens based on remember me preference
-      // If remember me is checked, store in localStorage (persists after browser close)
-      // Otherwise store in sessionStorage (cleared when browser is closed)
       if (formData.rememberMe) {
         localStorage.setItem('access_token', data.access);
         localStorage.setItem('refresh_token', data.refresh);
@@ -55,14 +86,29 @@ const Login:React.FC = () => {
       // Update auth context
       login(data.access, data.refresh, formData.rememberMe)
       
-      // Show success message and navigate
-
-      toast.success('Login Successful')
-      navigate("/dashboard")
+      // Update the existing toast instead of creating a new one
+      toast.update(loginToast, { 
+        render: 'Login successful! Redirecting...', 
+        type: 'success',
+        isLoading: false,
+        autoClose: 1000
+      })
+      
+      // Navigate after a short delay to allow the toast to be seen
+      setTimeout(() => navigate("/dashboard"), 500)
     } catch(err:unknown) {
       console.log("Login Error", err)
       setLoading(false)
-      toast.error("Login failed. Please check your credentials and try again.")
+      
+      // Update the existing toast to show the error
+      toast.update(loginToast, { 
+        render: err instanceof Error && err.message === 'Aborted' 
+          ? 'Login timed out. Please try again.' 
+          : 'Login failed. Please check your credentials and try again.',
+        type: 'error',
+        isLoading: false,
+        autoClose: 3000
+      })
     }
   }
   return (
@@ -125,8 +171,18 @@ const Login:React.FC = () => {
                    {/* <Link to="/forgot-password" className="text-[#1B10A4] text-sm ml-36  ">Forgot Password?</Link> */}
                    
 
-                    <button className='w-full bg-[#1B10A4] mt-6 text-white border-none py-[18px] px-6 rounded-[10px] cursor-pointer text-sm' onClick={handleSubmit}>
-                      {loading ? "Logging in..." : "Sign In"}
+                    <button 
+                      className={`w-full mt-6 text-white border-none py-[18px] px-6 rounded-[10px] text-sm ${
+                        loading || apiStatus === 'connecting' 
+                          ? 'bg-[#5d54c2] cursor-not-allowed' 
+                          : 'bg-[#1B10A4] cursor-pointer hover:bg-[#150d8a]'
+                      }`} 
+                      onClick={handleSubmit}
+                      disabled={loading || apiStatus === 'connecting'}
+                    >
+                      {loading ? "Logging in..." : 
+                       apiStatus === 'connecting' ? "Preparing login..." : 
+                       "Sign In"}
                     </button>
 
                     <div className="mt-4">

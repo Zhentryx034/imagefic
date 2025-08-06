@@ -23,15 +23,15 @@ const Dashboard: React.FC = () => {
 
     useEffect(()=>{
         //this logic check authentication immediately when component mounts
-        if(!localStorage.getItem("authToken")){
+        if(!localStorage.getItem("access_token") && !sessionStorage.getItem("access_token")){
             navigate('/login', {replace: true})
         }
     }, [navigate])
 
     // if not authenticated, don't render anything
-    if(!localStorage.getItem("authToken")){{
+    if(!localStorage.getItem("access_token") && !sessionStorage.getItem("access_token")){
         return null
-    }}
+    }
   return (
      <div className='font-["Poppins"] bg-white h-screen'>
        <DashboardNav />

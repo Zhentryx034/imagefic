@@ -11,7 +11,7 @@ const CategoryPage: React.FC = () => {
         
    fetch(`https://backend-imagfic.onrender.com/api/v1/categories/${id}/`, {
         headers: {
-        Authorization: `Bearer ${localStorage.getItem("authToken") || sessionStorage.getItem("authToken")}`,
+        Authorization: `Bearer ${localStorage.getItem("access_token") || sessionStorage.getItem("access_token")}`,
         },
    })
      .then(res => res.json())
@@ -21,7 +21,7 @@ const CategoryPage: React.FC = () => {
    // Fetch images for this category
    fetch(`https://backend-imagfic.onrender.com/api/v1/categories/${id}/images/`, {
         headers: {
-        Authorization: `Bearer ${localStorage.getItem("authToken") || sessionStorage.getItem("authToken")}`,
+        Authorization: `Bearer ${localStorage.getItem("access_token") || sessionStorage.getItem("access_token")}`,
         },
    })
      .then(res => res.json())

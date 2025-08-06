@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import DashboardNav from './DashboardNav';
 import { useNavigate } from 'react-router-dom';
 
-// Using placeholder images to avoid path issues
+// Using placeholder images to avoid path issues with spaces in filenames
 const categoryImages: Record<string, string> = {
     'Presentation': 'https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=Presentation',
     'Cars': 'https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=Cars',
@@ -14,6 +14,7 @@ const categoryImages: Record<string, string> = {
 };
 
 import Card from './Card';
+
 
 const Dashboard: React.FC = () => {
     const [categories, setCategories] = useState<{id:number, name: string}[]>([])

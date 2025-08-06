@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
 import { useAuth } from './context/AuthContext'
+import { FaEyeSlash, FaEye } from 'react-icons/fa'
 
 
 const Login:React.FC = () => {
@@ -14,6 +15,7 @@ const Login:React.FC = () => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({email:"",password:"", rememberMe:false})
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
   // const [error, setError] = useState<string | null>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
@@ -28,33 +30,38 @@ const Login:React.FC = () => {
   const handleSubmit = async (e:React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    // setError(null)
-    // console.log("Form data:", formData)
-    try{
-       const data = await loginUser(formData.email,formData.password)
-      // const token = await loginUser(formData.email,formData.password)
-      
-      // //save token to local storage or session storage based on remember me
-      if (formData.rememberMe) {
-  localStorage.setItem('access_token', data.access);
-  localStorage.setItem('refresh_token', data.refresh);
-} else {
-  sessionStorage.setItem('access_token', data.access);
-  sessionStorage.setItem('refresh_token', data.refresh);
-}
-
-
-     
-     login(data.access, data.refresh, formData.rememberMe)
-      toast.success('Login Successful')
-       navigate("/dashboard")
-
     
-    }catch(err:unknown){
-      // setError(err instanceof Error ? err.message : "An error occurred")
-      console.log("Login Error",err)
+    try{
+      // Call login API
+      const data = await loginUser(formData.email, formData.password)
+      
+      // Store tokens based on remember me preference
+      // If remember me is checked, store in localStorage (persists after browser close)
+      // Otherwise store in sessionStorage (cleared when browser is closed)
+      if (formData.rememberMe) {
+        localStorage.setItem('access_token', data.access);
+        localStorage.setItem('refresh_token', data.refresh);
+        // Clear session storage to avoid duplicate tokens
+        sessionStorage.removeItem('access_token');
+        sessionStorage.removeItem('refresh_token');
+      } else {
+        sessionStorage.setItem('access_token', data.access);
+        sessionStorage.setItem('refresh_token', data.refresh);
+        // Clear local storage to ensure tokens aren't persisted
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+      }
+      
+      // Update auth context
+      login(data.access, data.refresh, formData.rememberMe)
+      
+      // Show success message and navigate
+      toast.success('Login Successful')
+      navigate("/dashboard")
+    } catch(err:unknown) {
+      console.log("Login Error", err)
       setLoading(false)
-       toast.error("Login failed. Please check your credentials and try again.")
+      toast.error("Login failed. Please check your credentials and try again.")
     }
   }
   return (
@@ -87,15 +94,24 @@ const Login:React.FC = () => {
                   />
 
                   <label htmlFor="password" className="block">Password</label>
-                  <input 
-                    type="password" 
-                    name="password" 
-                    id="password" 
-                    value={formData.password}
-                    onChange={handleChange}
-                    placeholder='Enter your password'
-                    className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1 rounded-[10px]" 
-                  />
+                  <div className="relative my-5">
+                    <input 
+                      type={showPassword ? "text" : "password"} 
+                      name="password" 
+                      id="password" 
+                      value={formData.password}
+                      onChange={handleChange}
+                      placeholder='Enter your password'
+                      className="w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1 rounded-[10px]" 
+                    />
+                    <button 
+                      type="button"
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+                    </button>
+                  </div>
                    <input 
                    type="checkbox" 
                    name="rememberMe" 

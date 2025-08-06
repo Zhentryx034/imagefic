@@ -80,7 +80,7 @@ export async function loginUser (email:string, password:string) {
 
 export async function logOutUser(){
  try{
-    const token = localStorage.getItem('authToken')
+    const token = localStorage.getItem('access_token') || sessionStorage.getItem('access_token')
     if(!token) throw new Error("No token found")
 
     const res = await fetch(`${API_BASE_URL}/api/v1/logout/`, {
@@ -91,7 +91,12 @@ export async function logOutUser(){
     })
 
     if(!res.ok) throw new Error ('Logout Failed')
-        localStorage.removeItem("authToken")
+    
+    // Clear tokens from both storage locations
+    localStorage.removeItem("access_token")
+    localStorage.removeItem("refresh_token")
+    sessionStorage.removeItem("access_token")
+    sessionStorage.removeItem("refresh_token")
     return true
  }
  catch (err:unknown){

@@ -28,23 +28,19 @@ const Login:React.FC = () => {
   const handleSubmit = async (e:React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    // setError(null)
-    // console.log("Form data:", formData)
     try{
        const data = await loginUser(formData.email,formData.password)
-      // const token = await loginUser(formData.email,formData.password)
+      localStorage.setItem("authToken", data.access)
+      sessionStorage.setItem("authToken", data.access)
       
-      // //save token to local storage or session storage based on remember me
       if (formData.rememberMe) {
-  localStorage.setItem('access_token', data.access);
-  localStorage.setItem('refresh_token', data.refresh);
-} else {
-  sessionStorage.setItem('access_token', data.access);
-  sessionStorage.setItem('refresh_token', data.refresh);
-}
-
-
-     
+        localStorage.setItem('access_token', data.access);
+        localStorage.setItem('refresh_token', data.refresh);
+      } else {
+        sessionStorage.setItem('access_token', data.access);
+        sessionStorage.setItem('refresh_token', data.refresh);
+        
+      }
      login(data.access, data.refresh, formData.rememberMe)
       toast.success('Login Successful')
        navigate("/dashboard")

@@ -55,14 +55,53 @@ const CategoryPage: React.FC = () => {
         return res.json();
      })
      .then(data => {
-       setIsLoading(false);
-       if (Array.isArray(data)) {
-         setImages(data.map((item: any) => item.image));
-       } else {
-         console.warn("Images data is not an array:", data);
-         setImages([]);
-       }
-     })
+        setIsLoading(false);
+        console.log("Raw image data from API:", data);
+        
+        if (Array.isArray(data)) {
+          // Log each item to see its structure
+          data.forEach((item, index) => {
+            console.log(`Image item ${index}:`, item);
+          });
+          
+          // Check if items have 'image' property or if URLs are direct strings
+          if (data.length > 0) {
+            if (typeof data[0] === 'string') {
+              // If data items are direct strings (URLs)
+              setImages(data);
+            } else if (data[0] && typeof data[0] === 'object') {
+              // Try to find the image URL property
+              const sampleKeys = Object.keys(data[0]);
+              console.log("Available keys in image data:", sampleKeys);
+              
+              // Look for common image URL property names
+              const possibleImageProps = ['image', 'url', 'src', 'image_url', 'path', 'file'];
+              const imageKey = sampleKeys.find(key => 
+                possibleImageProps.includes(key.toLowerCase()) || 
+                key.toLowerCase().includes('image') || 
+                key.toLowerCase().includes('url')
+              );
+              
+              if (imageKey) {
+                console.log(`Found image property: ${imageKey}`);
+                setImages(data.map(item => item[imageKey]));
+              } else {
+                console.warn("Could not determine image URL property");
+                setImages([]);
+              }
+            } else {
+              console.warn("Unexpected data format for images");
+              setImages([]);
+            }
+          } else {
+            console.log("Empty image array returned from API");
+            setImages([]);
+          }
+        } else {
+          console.warn("Images data is not an array:", data);
+          setImages([]);
+        }
+      })
      .catch(err => {
        setIsLoading(false);
        console.error("Error fetching category images:", err);

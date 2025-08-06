@@ -56,6 +56,7 @@ const Login:React.FC = () => {
       login(data.access, data.refresh, formData.rememberMe)
       
       // Show success message and navigate
+
       toast.success('Login Successful')
       navigate("/dashboard")
     } catch(err:unknown) {

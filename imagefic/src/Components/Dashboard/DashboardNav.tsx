@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/Zhentryx.png";
-// Importing the user image properly
-import userAvatar from "../../assets/Pictures/dashboard images/user.png";
+// Using react-icons instead of image file
+import { FaUserCircle } from "react-icons/fa";
 import { logOutUser } from "../Auth/authConfig";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
@@ -32,10 +32,9 @@ const DashboardNav: React.FC = () => {
             <p className='hover:text-purple-600 hover:scale-105'>Explore</p>
             <p className='hover:text-purple-600 hover:scale-105'>Create</p>
             <div className="relative">
-              <img 
-                src={userAvatar} 
-                alt="User" 
-                className='w-10 h-10 rounded-full cursor-pointer' 
+              <FaUserCircle 
+                size={40} 
+                className='text-gray-600 cursor-pointer hover:text-purple-600' 
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               />
               {dropdownOpen && (

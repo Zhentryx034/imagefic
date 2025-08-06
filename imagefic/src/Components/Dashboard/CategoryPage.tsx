@@ -1,6 +1,11 @@
 import React, {useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
 
+// Import local fallback images for categories
+import img1 from '../../assets/Pictures/dashboard-images/dashboard-img (1).png';
+import img2 from '../../assets/Pictures/dashboard-images/dashboard-img (2).png';
+import img3 from '../../assets/Pictures/dashboard-images/dashboard-img (3).png';
+
 const CategoryPage: React.FC = () => {
     const {id} = useParams<{id: string}>()
     const [images, setImages] = useState<string[]>([])

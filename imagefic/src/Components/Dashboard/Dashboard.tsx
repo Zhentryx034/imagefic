@@ -2,15 +2,22 @@ import React, { useEffect, useState } from 'react';
 import DashboardNav from './DashboardNav';
 import { useNavigate } from 'react-router-dom';
 
-// Using placeholder images to avoid path issues with spaces in filenames
-const categoryImages: Record<string, string> = {
-    'Presentation': 'https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=Presentation',
-    'Cars': 'https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=Cars',
-    'Illustration': 'https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=Illustration',
-    'Art': 'https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=Art',
-    'Sport': 'https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=Sport',
-    'Nature': 'https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=Nature',
-    'test': 'https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=Category'
+// Import local fallback images
+import img1 from '../../assets/Pictures/dashboard-images/dashboard-img (1).png';
+import img2 from '../../assets/Pictures/dashboard-images/dashboard-img (2).png';
+import img3 from '../../assets/Pictures/dashboard-images/dashboard-img (3).png';
+import img4 from '../../assets/Pictures/dashboard-images/dashboard-img (4).png';
+import img5 from '../../assets/Pictures/dashboard-images/dashboard-img (5).png';
+import img6 from '../../assets/Pictures/dashboard-images/dashboard-img (6).png';
+
+// Array of local fallback images
+const fallbackImages = [img1, img2, img3, img4, img5, img6];
+
+// Function to get an image for a category
+const getCategoryImage = (categoryId: number): string => {
+    // Use local fallback image based on category ID (modulo to stay within array bounds)
+    const index = (categoryId - 1) % fallbackImages.length;
+    return fallbackImages[index] || fallbackImages[0];
 };
 
 import Card from './Card';
@@ -42,10 +49,17 @@ const Dashboard: React.FC = () => {
             }
         })
 
-        .then(res =>res.json())
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(`API error: ${res.status} ${res.statusText}`);
+            }
+            return res.json();
+        })
         .then(data => {
             console.log("Categories fetched successfully", data)
             if(Array.isArray(data)){
+                // Log each category to debug
+                data.forEach(cat => console.log("Category:", cat.id, cat.name));
                 setCategories(data)
             }else{
                 setCategories([]) // fallback to empty array
@@ -70,7 +84,7 @@ const Dashboard: React.FC = () => {
                 {categories.map((cat)=> (
                     <Card 
                      key={cat.id}
-                     img={categoryImages[cat.name] || categoryImages['test']}
+                     img={getCategoryImage(cat.id)}
                      title={cat.name}
                      link={`/category/${cat.id}`}
                     />

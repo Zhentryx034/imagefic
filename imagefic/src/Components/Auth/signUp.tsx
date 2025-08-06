@@ -4,10 +4,11 @@ import img from '../../assets/Pictures/auth-img.png'
 import { Link } from 'react-router-dom'
 import { createUser } from './authConfig'
 import { useNavigate } from 'react-router-dom'
+import { FaEyeSlash, FaEye } from 'react-icons/fa'
 
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
- import { toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 const SignUp:React.FC = () => {
   const navigate = useNavigate()
@@ -21,6 +22,8 @@ const SignUp:React.FC = () => {
 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
         setFormData({
@@ -108,28 +111,46 @@ const SignUp:React.FC = () => {
                   />
 
                   <label htmlFor="password" className="block">Password</label>
-                  <input 
-                    type="password" 
-                    name="password" 
-                    id="password" 
-                    required
-                    value={formData.password}
-                    onChange={handleChange}
-                    placeholder='Enter your password'
-                    className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1 rounded-[10px]" 
-                  />
+                  <div className="relative my-5">
+                    <input 
+                      type={showPassword ? "text" : "password"} 
+                      name="password" 
+                      id="password" 
+                      required
+                      value={formData.password}
+                      onChange={handleChange}
+                      placeholder='Enter your password'
+                      className="w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1 rounded-[10px]" 
+                    />
+                    <button 
+                      type="button"
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+                    </button>
+                  </div>
 
                   <label htmlFor="confirmPassword" className="block">Confirm Password</label>
-                  <input 
-                    type="password" 
-                    name="confirm_password" 
-                    id="confirmPassword" 
-                    required
-                    value={formData.confirm_password}
-                    onChange={handleChange}
-                    placeholder='Enter your password'
-                    className="my-5 w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1 rounded-[10px]" 
-                  />
+                  <div className="relative my-5">
+                    <input 
+                      type={showConfirmPassword ? "text" : "password"} 
+                      name="confirm_password" 
+                      id="confirmPassword" 
+                      required
+                      value={formData.confirm_password}
+                      onChange={handleChange}
+                      placeholder='Confirm your password'
+                      className="w-full border border-[#D3D3D3] px-6 py-[18px] focus:outline focus:outline-[#1B10A4] focus:outline-1 rounded-[10px]" 
+                    />
+                    <button 
+                      type="button"
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    >
+                      {showConfirmPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+                    </button>
+                  </div>
             
                     <button type='submit' className='w-full bg-[#1B10A4] text-white border-none py-[18px] px-6 rounded-[10px] cursor-pointer text-sm' disabled={loading} onClick={handleSubmit}>{loading ? "Signing up.....": "Sign Up"}</button>
                     <div className="mt-4">

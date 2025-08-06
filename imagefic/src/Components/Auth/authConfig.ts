@@ -80,22 +80,39 @@ export async function loginUser (email:string, password:string) {
 
 export async function logOutUser(){
  try{
-    const token = localStorage.getItem('authToken')
-    if(!token) throw new Error("No token found")
-
-    const res = await fetch(`${API_BASE_URL}/api/v1/logout/`, {
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${token}`
-        },
-    })
-
-    if(!res.ok) throw new Error ('Logout Failed')
-        localStorage.removeItem("authToken")
+    const token = localStorage.getItem('access_token') || sessionStorage.getItem('access_token')
+    if(!token) {
+      console.warn("No token found, but proceeding with local logout")
+    } else {
+      try {
+        // Try to call the backend logout endpoint, but don't block local logout if it fails
+        await fetch(`${API_BASE_URL}/api/v1/logout/`, {
+          method: "POST",
+          headers: {
+              Authorization: `Bearer ${token}`
+          },
+        })
+        // We don't check res.ok here - we'll proceed with local logout regardless
+      } catch (apiError) {
+        console.warn("API logout failed, but proceeding with local logout", apiError)
+      }
+    }
+    
+    // Always clear tokens from both storage locations, even if API call failed
+    localStorage.removeItem("access_token")
+    localStorage.removeItem("refresh_token")
+    sessionStorage.removeItem("access_token")
+    sessionStorage.removeItem("refresh_token")
     return true
  }
  catch (err:unknown){
      console.error("Logout error", err)
-     throw err
+     // Still clear tokens even if there was an error
+     localStorage.removeItem("access_token")
+     localStorage.removeItem("refresh_token")
+     sessionStorage.removeItem("access_token")
+     sessionStorage.removeItem("refresh_token")
+     // Don't throw the error - return true to indicate local logout was successful
+     return true
  }
 }

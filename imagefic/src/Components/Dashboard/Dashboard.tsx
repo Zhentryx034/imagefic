@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import DashboardNav from './DashboardNav';
 import { useNavigate } from 'react-router-dom';
- import img1 from '../../assets/Pictures/dashboard images/dashboard-img (1).png'
-// import img2 from '../../assets/Pictures/dashboard images/dashboard-img (6).png'
-// import img3 from '../../assets/Pictures/dashboard images/dashboard-img (5).png' 
-// import img4 from '../../assets/Pictures/dashboard images/dashboard-img (4).png'
-// import img5 from '../../assets/Pictures/dashboard images/dashboard-img (3).png'
-// import img6 from '../../assets/Pictures/dashboard images/dashboard-img (2).png'
+import img1 from '../../assets/Pictures/dashboard-images/dashboard-img (1).png'
+import img2 from '../../assets/Pictures/dashboard-images/dashboard-img (6).png'
+import img3 from '../../assets/Pictures/dashboard-images/dashboard-img (5).png' 
+import img4 from '../../assets/Pictures/dashboard-images/dashboard-img (4).png'
+import img5 from '../../assets/Pictures/dashboard-images/dashboard-img (3).png'
+import img6 from '../../assets/Pictures/dashboard-images/dashboard-img (2).png'
+
 import Card from './Card';
 
 
@@ -24,7 +25,7 @@ const Dashboard: React.FC = () => {
 
     useEffect(()=>{
         //this logic check authentication immediately when component mounts
-        if(!localStorage.getItem("authToken")){
+        if(!localStorage.getItem("access_token") && !sessionStorage.getItem("access_token")){
             navigate('/login', {replace: true})
             return;
         }
@@ -50,14 +51,10 @@ const Dashboard: React.FC = () => {
     }, [navigate])
 
     // if not authenticated, don't render anything
-    if(!localStorage.getItem("authToken")){{
+    if(!localStorage.getItem("access_token") && !sessionStorage.getItem("access_token")){
         return null
-    }}
 
-//Example images for categories
-const categoryImages: { [key:string]: string} = {
-    test: img1,
-}
+    }
 
   return (
      <div className='font-["Poppins"] bg-white h-screen'>
